@@ -5,7 +5,7 @@
 #include "Snail.h"
 
 Snail::Snail(string name, SnailType type, int initSize)
-        : name(name), type(type), size(initSize) {
+            : name(name), type(type), size(initSize) {
 
 }
 
@@ -20,5 +20,3 @@ SnailType Snail::getType() {
 int Snail::getSize() {
     return size;
 }
-
-

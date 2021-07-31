@@ -10,7 +10,7 @@
 using namespace std;
 
 enum SnailType {
-    TYPE_1,
+    ROMAN_SNAIL,
     TYPE_2,
     TYPE_3
 };
@@ -26,6 +26,8 @@ protected:
     Snail(string name, SnailType type, int initSize);
 
 public:
+    virtual void eat() = 0;
+
     string getName();
 
     SnailType getType();
