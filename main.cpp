@@ -7,6 +7,8 @@
 #include "model/Lettuce.h"
 #include "model/TurkishSnail.h"
 #include "model/GardenSnail.h"
+#include "model/Grass.h"
+#include "model/Carrot.h"
 
 int main() {
     RomanSnail romanSnail("maciek", 5);
@@ -23,11 +25,22 @@ int main() {
         random->eat();
     }
 
-    Plant lettuce = Lettuce("salata", 10);
-    RandomSet<Plant> plants;
-    plants.add(lettuce);
-    Plant randomPlant = plants.getRandom();
-    std::cout << "Plant:" << randomPlant.getName() << std::endl;
+    Lettuce lettuce("salata", 10);
+    Grass grass("trawa", 30);
+    Carrot carrot("marchewka", 12);
+    RandomSet<Plant*> plants;
+    plants.add(&lettuce);
+    plants.add(&grass);
+    plants.add(&carrot);
+    for(int i = 0; i<10; i++){
+        Plant *random = plants.getRandom();
+        std::cout << "Plant:" << random->getName() << std::endl;
+        random->grow();
+    }
+    for (auto elem : plants)
+    {
+        std::cout << elem->getName() << ":" << elem->getSize() << " , ";
+    }
 
     return 0;
 }

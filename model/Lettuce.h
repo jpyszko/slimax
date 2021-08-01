@@ -1,5 +1,5 @@
 //
-// Created by yaspe on 18.07.2021.
+// Created by jpyszko on 18.07.2021.
 //
 
 #ifndef SLIMAX_LETTUCE_H
@@ -9,10 +9,10 @@
 
 class Lettuce : public Plant {
 
-    public:
+public:
     Lettuce(string name, int initSize);
 
-
+    void grow() override;
 };
 
 

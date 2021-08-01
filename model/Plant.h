@@ -1,5 +1,5 @@
 //
-// Created by yaspe on 18.07.2021.
+// Created by jpyszko on 18.07.2021.
 //
 
 #ifndef SLIMAX_PLANT_H
@@ -11,8 +11,8 @@ using namespace std;
 
 enum PlantType {
     LETTUCE,
-    P_TYPE_2,
-    P_TYPE_3
+    GRASS,
+    CARROT
 };
 
 class Plant {
@@ -25,7 +25,13 @@ private:
 protected:
     Plant(string name, PlantType type, int initSize);
 
+    void setSize(int size){
+        this->size = size;
+    }
+
 public:
+    virtual void grow() = 0;
+
     string getName();
 
     PlantType getType();

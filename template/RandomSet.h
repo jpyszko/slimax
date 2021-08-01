@@ -38,6 +38,14 @@ public:
         return *it;
     }
 
+    auto begin(){
+        return container.begin();
+    }
+
+    auto end(){
+        return container.end();
+    }
+
 };
 
 #endif //SLIMAX_RANDOMSET_H
