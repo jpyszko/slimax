@@ -6,6 +6,7 @@
 #define SLIMAX_RANDOMSET_H
 
 #include <set>
+#include <random>
 
 template<typename T>
 class RandomSet {
@@ -13,16 +14,25 @@ class RandomSet {
 private:
     std::set<T> container;
 
+    std::default_random_engine generator;
+    std::uniform_int_distribution<> distribution;
+
 public:
-    RandomSet() = default;
+    RandomSet() {
+        unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count();
+        generator = std::default_random_engine(seed);
+    }
 
     bool add(T element) {
-        return container.insert(element).second;
+        bool inserted = container.insert(element).second;
+        distribution = std::uniform_int_distribution<>(0, container.size() - 1);
+
+        return inserted;
     }
 
     T getRandom() {
         auto it = container.cbegin();
-        int random = rand() % container.size();
+        int random = distribution(generator);
         std::advance(it, random);
 
         return *it;
