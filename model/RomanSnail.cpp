@@ -11,5 +11,5 @@ RomanSnail::RomanSnail(string name, int initSize)
 }
 
 void RomanSnail::eat() {
-    std::cout << "eat"<< std::endl;
+    std::cout << "Roman eat"<< std::endl;
 }

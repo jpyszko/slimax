@@ -11,7 +11,7 @@ using namespace std;
 
 enum SnailType {
     ROMAN_SNAIL,
-    TYPE_2,
+    TURKISH_SNAIL,
     TYPE_3
 };
 
