@@ -11,6 +11,6 @@ GardenSnail::GardenSnail(string name, int initSize)
 
 }
 
-void GardenSnail::eat() {
-    std::cout << "Garden eat"<< std::endl;
+void GardenSnail::eat(RandomSet<Plant *> plants) {
+
 }

@@ -21,3 +21,16 @@ PlantType Plant::getType() {
 int Plant::getSize() {
     return size;
 }
+
+int Plant::bite(int biteSize) {
+    if(biteSize > getSize()){
+        setSize(0);
+        return getSize();
+    }
+    setSize(getSize() - biteSize);
+    return biteSize;
+}
+
+void Plant::setSize(int size) {
+    this->size = size;
+}

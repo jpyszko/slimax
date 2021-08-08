@@ -5,6 +5,7 @@
 #ifndef SLIMAX_ROMANSNAIL_H
 #define SLIMAX_ROMANSNAIL_H
 
+#include "../template/RandomSet.h"
 #include "Snail.h"
 
 using namespace std;
@@ -14,7 +15,7 @@ class RomanSnail : public Snail {
 public:
     RomanSnail(string name, int initSize);
 
-    void eat() override;
+    void eat(RandomSet<Plant*> plants) override;
 
     ~RomanSnail() = default;
 

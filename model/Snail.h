@@ -6,6 +6,8 @@
 #define SLIMAX_SNAIL_H
 
 #include <string>
+#include "../template/RandomSet.h"
+#include "Plant.h"
 
 using namespace std;
 
@@ -25,8 +27,10 @@ private:
 protected:
     Snail(string name, SnailType type, int initSize);
 
+    void setSize(int size);
+
 public:
-    virtual void eat() = 0;
+    virtual void eat(RandomSet<Plant *> plants) = 0;
 
     string getName();
 
@@ -34,8 +38,7 @@ public:
 
     int getSize();
 
-    bool operator< (const Snail &right) const
-    {
+    bool operator<(const Snail &right) const {
         return name < right.name;
     }
 

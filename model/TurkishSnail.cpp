@@ -10,7 +10,6 @@ TurkishSnail::TurkishSnail(string name, int initSize)
 
 }
 
-void TurkishSnail::eat() {
-    std::cout << "Turkish eat"<< std::endl;
+void TurkishSnail::eat(RandomSet<Plant *> plants) {
 
 }

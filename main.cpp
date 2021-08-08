@@ -24,27 +24,30 @@ int main() {
 
     RandomSet<Snail*> snails;
     snails.add(&romanSnail);
-    snails.add(&turkishSnail);
-    snails.add(&gardenSnail);
-    for(int i = 0; i<10; i++){
-        Snail *random = snails.getRandom();
-        std::cout << "Snail:" << random->getName() << std::endl;
-        random->eat();
-    }
+//    snails.add(&turkishSnail);
+//    snails.add(&gardenSnail);
 
     Lettuce lettuce("salata", 10);
     Grass grass("trawa", 30);
     Carrot carrot("marchewka", 12);
     RandomSet<Plant*> plants;
     plants.add(&lettuce);
-    plants.add(&grass);
-    plants.add(&carrot);
+//    plants.add(&grass);
+//    plants.add(&carrot);
     for(int i = 0; i<10; i++){
-        Plant *random = plants.getRandom();
-        std::cout << "Plant:" << random->getName() << std::endl;
-        random->grow();
+        Snail *snail = snails.getRandom();
+        std::cout << "Snail:" << snail->getName() << std::endl;
+        snail->eat(plants);
+        Plant *plant = plants.getRandom();
+        std::cout << "Plant:" << plant->getName() << std::endl;
+        plant->grow();
     }
     for (auto elem : plants)
+    {
+        std::cout << elem->getName() << ":" << elem->getSize() << " , ";
+    }
+    std::cout << std::endl;
+    for (auto elem : snails)
     {
         std::cout << elem->getName() << ":" << elem->getSize() << " , ";
     }

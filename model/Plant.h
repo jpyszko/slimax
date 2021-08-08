@@ -25,12 +25,12 @@ private:
 protected:
     Plant(string name, PlantType type, int initSize);
 
-    void setSize(int size){
-        this->size = size;
-    }
+    void setSize(int size);
 
 public:
     virtual void grow() = 0;
+
+    int bite(int biteSize);
 
     string getName();
 

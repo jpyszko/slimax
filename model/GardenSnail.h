@@ -15,7 +15,7 @@ class GardenSnail : public Snail{
 public:
     GardenSnail(string name, int initSize);
 
-    void eat() override;
+    void eat(RandomSet<Plant*> plants) override;
 
     ~GardenSnail() = default;
 };

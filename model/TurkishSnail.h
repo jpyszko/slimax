@@ -15,7 +15,7 @@ class TurkishSnail : public Snail{
 public:
     TurkishSnail(string name, int initSize);
 
-    void eat() override;
+    void eat(RandomSet<Plant*> plants) override;
 
     ~TurkishSnail() = default;
 };
