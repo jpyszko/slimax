@@ -39,6 +39,8 @@ public:
         return name < right.name;
     }
 
+    ~Snail() = default;
+
 };
 
 #endif //SLIMAX_SNAIL_H

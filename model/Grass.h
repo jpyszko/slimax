@@ -14,6 +14,8 @@ public:
     Grass(string name, int intSize);
 
     void grow() override;
+
+    ~Grass() = default;
 };
 
 

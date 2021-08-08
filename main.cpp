@@ -9,8 +9,15 @@
 #include "model/GardenSnail.h"
 #include "model/Grass.h"
 #include "model/Carrot.h"
+#include "engine/SimulationBuilder.h"
 
 int main() {
+    SimulationBuilder builder;
+    const Simulation &simulation = builder.simulation(1, 1, 1)
+            .addSnail("maciek", ROMAN_SNAIL, 5)
+            .addPlant("salata", LETTUCE, 10)
+            .build();
+
     RomanSnail romanSnail("maciek", 5);
     TurkishSnail turkishSnail("zenek", 10);
     GardenSnail gardenSnail("wojtek", 10);

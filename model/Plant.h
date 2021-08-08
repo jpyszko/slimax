@@ -42,6 +42,8 @@ public:
         return name < right.name;
     }
 
+    ~Plant() = default;
+
 };
 
 

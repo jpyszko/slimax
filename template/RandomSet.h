@@ -7,6 +7,7 @@
 
 #include <set>
 #include <random>
+#include <chrono>
 
 template<typename T>
 class RandomSet {

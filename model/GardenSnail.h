@@ -17,6 +17,7 @@ public:
 
     void eat() override;
 
+    ~GardenSnail() = default;
 };
 
 
