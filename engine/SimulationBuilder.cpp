@@ -29,8 +29,8 @@ SimulationBuilder& SimulationBuilder::addPlant(string name, PlantType type, int 
     return *this;
 }
 
-Simulation SimulationBuilder::build() {
-    return {duration, aquariumWeight, aquariumLength, snails, plants};
+Simulation* SimulationBuilder::build() {
+    return new Simulation{duration, aquariumWeight, aquariumLength, snails, plants};
 }
 
 Snail* SimulationBuilder::initSnail(string name, SnailType type, int initSize) {

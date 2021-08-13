@@ -34,7 +34,7 @@ public:
 
     SimulationBuilder& addPlant(string name, PlantType type, int initSize);
 
-    Simulation build();
+    Simulation* build();
 };
 
 
