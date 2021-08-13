@@ -15,7 +15,7 @@ void RomanSnail::eat(RandomSet<Plant *> plants) {
     if (plant->getType() == LETTUCE) {
         int biteSize = plant->bite(getSize() / 2 + 1);
         setSize(getSize() + biteSize);
-    } else if (plant->getType() == CARROT) {
+    } else if (plant->getType() == GRASS) {
         int biteSize = plant->bite(getSize() / 4);
         setSize(getSize() + biteSize);
     } else {

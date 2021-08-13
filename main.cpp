@@ -24,16 +24,16 @@ int main() {
 
     RandomSet<Snail*> snails;
     snails.add(&romanSnail);
-//    snails.add(&turkishSnail);
-//    snails.add(&gardenSnail);
+    snails.add(&turkishSnail);
+    snails.add(&gardenSnail);
 
     Lettuce lettuce("salata", 10);
     Grass grass("trawa", 30);
     Carrot carrot("marchewka", 12);
     RandomSet<Plant*> plants;
     plants.add(&lettuce);
-//    plants.add(&grass);
-//    plants.add(&carrot);
+    plants.add(&grass);
+    plants.add(&carrot);
     for(int i = 0; i<10; i++){
         Snail *snail = snails.getRandom();
         std::cout << "Snail:" << snail->getName() << std::endl;
