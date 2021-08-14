@@ -11,13 +11,27 @@
 
 using namespace std;
 
+enum SimulationResult{
+    SNAILS_WINS,
+    PLANTS_WINS,
+    DRAW
+};
+
 class SimulationRunner {
 
 private:
 
+    const int roundsPerSecond = 5;
+
     Simulation* simulation = nullptr;
 
     Notificator* notificator;
+
+    int countSnailsArea(RandomSet<Snail *> &snails);
+
+    int countPlantsArea(RandomSet<Plant *> &plants);
+
+    SimulationResult determineWinner(int numberOfSnails, int numberOfPlants);
 
 public:
 
@@ -25,7 +39,7 @@ public:
 
     void load(SimulationBuilder& simulationBuilder);
 
-    void run();
+    SimulationResult run();
 
 };
 

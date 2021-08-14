@@ -3,26 +3,68 @@
 //
 
 #include <iostream>
+#include <thread>
 #include "SimulationRunner.h"
 
 SimulationRunner::SimulationRunner(Notificator *notificator) : notificator(notificator) {}
 
-void SimulationRunner::load(SimulationBuilder& simulationBuilder) {
+void SimulationRunner::load(SimulationBuilder &simulationBuilder) {
     simulation = simulationBuilder.build();
 }
 
-void SimulationRunner::run() {
+SimulationResult SimulationRunner::run() {
 
     RandomSet<Snail *> snails = simulation->getSnails();
     RandomSet<Plant *> plants = simulation->getPlants();
 
-    for(int i = 0; i<10; i++){
+    int numberOfRounds = roundsPerSecond * simulation->getDuration();
+    int timeBetweenRounds = 1000 / roundsPerSecond;
+
+    for (int roundNumber = 0; roundNumber < numberOfRounds; roundNumber++) {
         Snail *snail = snails.getRandom();
         snail->eat(plants);
 
         Plant *plant = plants.getRandom();
         plant->grow();
 
+        int totalSnailsArea = countSnailsArea(snails);
+        int totalPlantsArea = countPlantsArea(plants);
+        if (totalSnailsArea + totalPlantsArea > simulation->getAquariumArea()) {
+            return determineWinner(totalSnailsArea, totalPlantsArea);
+        }
+
         notificator->notify(1, snails, plants);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(timeBetweenRounds));
+    }
+
+    int totalSnailsArea = countSnailsArea(snails);
+    int totalPlantsArea = countPlantsArea(plants);
+    return determineWinner(totalSnailsArea, totalPlantsArea);
+}
+
+int SimulationRunner::countSnailsArea(RandomSet<Snail *> &snails) {
+    int totalSnailsArea = 0;
+    for (auto elem : snails) {
+        totalSnailsArea += elem->getSize();
+    }
+    return totalSnailsArea;
+}
+
+int SimulationRunner::countPlantsArea(RandomSet<Plant *> &plants) {
+    int totalPlantsArea = 0;
+    for (auto elem : plants) {
+        totalPlantsArea += elem->getSize();
+    }
+    return totalPlantsArea;
+}
+
+SimulationResult SimulationRunner::determineWinner(int numberOfSnails, int numberOfPlants) {
+    if (numberOfSnails > numberOfPlants) {
+        return SNAILS_WINS;
+    } else if (numberOfSnails < numberOfPlants) {
+        return PLANTS_WINS;
+    } else {
+        return DRAW;
     }
 }

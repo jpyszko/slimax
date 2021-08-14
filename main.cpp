@@ -15,8 +15,10 @@
 
 int main() {
     SimulationBuilder builder;
-    SimulationBuilder &simulationBuilder = builder.simulation(1, 1, 1)
+    SimulationBuilder &simulationBuilder = builder.simulation(10, 200, 500)
             .addSnail("maciek", ROMAN_SNAIL, 5)
+            .addSnail("maciek2", ROMAN_SNAIL, 30)
+            .addSnail("maciek3", ROMAN_SNAIL, 20)
             .addSnail("zenek", TURKISH_SNAIL, 10)
             .addSnail("wojtek", GARDEN_SNAIL, 10)
             .addPlant("salata", LETTUCE, 10)
@@ -25,42 +27,9 @@ int main() {
     SimpleNotificator notificator;
     SimulationRunner runner(&notificator);
     runner.load(simulationBuilder);
-    runner.run();
+    SimulationResult result = runner.run();
 
-
-//    RomanSnail romanSnail("maciek", 5);
-//    TurkishSnail turkishSnail("zenek", 10);
-//    GardenSnail gardenSnail("wojtek", 10);
-//
-//    RandomSet<Snail*> snails;
-//    snails.add(&romanSnail);
-//    snails.add(&turkishSnail);
-//    snails.add(&gardenSnail);
-//
-//    Lettuce lettuce("salata", 10);
-//    Grass grass("trawa", 30);
-//    Carrot carrot("marchewka", 12);
-//    RandomSet<Plant*> plants;
-//    plants.add(&lettuce);
-//    plants.add(&grass);
-//    plants.add(&carrot);
-//    for(int i = 0; i<10; i++){
-//        Snail *snail = snails.getRandom();
-//        std::cout << "Snail:" << snail->getName() << std::endl;
-//        snail->eat(plants);
-//        Plant *plant = plants.getRandom();
-//        std::cout << "Plant:" << plant->getName() << std::endl;
-//        plant->grow();
-//    }
-//    for (auto elem : plants)
-//    {
-//        std::cout << elem->getName() << ":" << elem->getSize() << " , ";
-//    }
-//    std::cout << std::endl;
-//    for (auto elem : snails)
-//    {
-//        std::cout << elem->getName() << ":" << elem->getSize() << " , ";
-//    }
+    std::cout << result;
 
     return 0;
 }
