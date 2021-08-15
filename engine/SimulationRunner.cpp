@@ -5,6 +5,7 @@
 #include <iostream>
 #include <thread>
 #include "SimulationRunner.h"
+#include "EngineUtils.h"
 
 SimulationRunner::SimulationRunner(Notificator *notificator) : notificator(notificator) {}
 
@@ -28,8 +29,8 @@ SimulationResult SimulationRunner::run() {
         Plant *plant = getAliveRandom(plants);
         plant->grow();
 
-        int totalSnailsArea = countSnailsArea(snails);
-        int totalPlantsArea = countPlantsArea(plants);
+        int totalSnailsArea = EngineUtils::countSnailsArea(snails);
+        int totalPlantsArea = EngineUtils::countPlantsArea(plants);
         if (totalSnailsArea + totalPlantsArea > simulation->getAquariumArea()) {
             return determineWinner(totalSnailsArea, totalPlantsArea);
         }
@@ -39,25 +40,9 @@ SimulationResult SimulationRunner::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(timeBetweenRounds));
     }
 
-    int totalSnailsArea = countSnailsArea(snails);
-    int totalPlantsArea = countPlantsArea(plants);
+    int totalSnailsArea = EngineUtils::countSnailsArea(snails);
+    int totalPlantsArea = EngineUtils::countPlantsArea(plants);
     return determineWinner(totalSnailsArea, totalPlantsArea);
-}
-
-int SimulationRunner::countSnailsArea(RandomSet<Snail *> &snails) {
-    int totalSnailsArea = 0;
-    for (auto elem : snails) {
-        totalSnailsArea += elem->getSize();
-    }
-    return totalSnailsArea;
-}
-
-int SimulationRunner::countPlantsArea(RandomSet<Plant *> &plants) {
-    int totalPlantsArea = 0;
-    for (auto elem : plants) {
-        totalPlantsArea += elem->getSize();
-    }
-    return totalPlantsArea;
 }
 
 SimulationResult SimulationRunner::determineWinner(int numberOfSnails, int numberOfPlants) {

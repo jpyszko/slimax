@@ -20,20 +20,13 @@ enum SimulationResult{
 class SimulationRunner {
 
 private:
-
     const int roundsPerSecond = 5;
-
     Simulation* simulation = nullptr;
-
     Notificator* notificator;
 
     Snail* getAliveRandom(RandomSet<Snail *> &snails);
 
     Plant* getAliveRandom(RandomSet<Plant *> &plants);
-
-    int countSnailsArea(RandomSet<Snail *> &snails);
-
-    int countPlantsArea(RandomSet<Plant *> &plants);
 
     SimulationResult determineWinner(int numberOfSnails, int numberOfPlants);
 

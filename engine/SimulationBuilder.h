@@ -23,9 +23,17 @@ private:
 
     int duration;
 
-    Snail* initSnail(string name, SnailType type, int initSize);
+    void validateSimulation(int duration, int aquariumWeight, int aquariumLength);
 
-    Plant* initPlant(string name, PlantType type, int initSize);
+    void validateSnail(string &name, int initSize);
+
+    void validatePlant(string &name, int initSize);
+
+    void validateAquariumSize(int aquariumWeight, int aquariumLength, RandomSet<Snail*> snails, RandomSet<Plant*> plants);
+
+    Snail* initSnail(string &name, SnailType type, int initSize);
+
+    Plant* initPlant(string &name, PlantType type, int initSize);
 
 public:
     SimulationBuilder& simulation(int duration, int aquariumWeight, int aquariumLength);
@@ -35,6 +43,8 @@ public:
     SimulationBuilder& addPlant(string name, PlantType type, int initSize);
 
     Simulation* build();
+
+    void validatePlant();
 };
 
 
