@@ -30,7 +30,7 @@ protected:
     void setSize(int size);
 
 public:
-    virtual void eat(RandomSet<Plant *> plants) = 0;
+    virtual void eat(Plant &plant) = 0;
 
     string getName();
 

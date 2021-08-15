@@ -10,12 +10,12 @@
 
 using namespace std;
 
-class TurkishSnail : public Snail{
+class TurkishSnail : public Snail {
 
 public:
     TurkishSnail(string name, int initSize);
 
-    void eat(RandomSet<Plant*> plants) override;
+    void eat(Plant &plant) override;
 
     ~TurkishSnail() = default;
 };

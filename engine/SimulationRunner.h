@@ -27,6 +27,10 @@ private:
 
     Notificator* notificator;
 
+    Snail* getAliveRandom(RandomSet<Snail *> &snails);
+
+    Plant* getAliveRandom(RandomSet<Plant *> &plants);
+
     int countSnailsArea(RandomSet<Snail *> &snails);
 
     int countPlantsArea(RandomSet<Plant *> &plants);

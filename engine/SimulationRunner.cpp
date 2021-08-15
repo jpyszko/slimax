@@ -21,10 +21,11 @@ SimulationResult SimulationRunner::run() {
     int timeBetweenRounds = 1000 / roundsPerSecond;
 
     for (int roundNumber = 0; roundNumber < numberOfRounds; roundNumber++) {
-        Snail *snail = snails.getRandom();
-        snail->eat(plants);
+        Snail *snail = getAliveRandom(snails);
+        Plant *food = getAliveRandom(plants);
+        snail->eat(*food);
 
-        Plant *plant = plants.getRandom();
+        Plant *plant = getAliveRandom(plants);
         plant->grow();
 
         int totalSnailsArea = countSnailsArea(snails);
@@ -67,4 +68,22 @@ SimulationResult SimulationRunner::determineWinner(int numberOfSnails, int numbe
     } else {
         return DRAW;
     }
+}
+
+Snail *SimulationRunner::getAliveRandom(RandomSet<Snail *> &snails) {
+    Snail *snail;
+    do{
+        snail = snails.getRandom();
+    } while (snail->getSize() <= 0);
+
+    return snail;
+}
+
+Plant *SimulationRunner::getAliveRandom(RandomSet<Plant *> &plants) {
+    Plant *plant;
+    do{
+        plant = plants.getRandom();
+    } while (plant->getSize() <= 0);
+
+    return plant;
 }
