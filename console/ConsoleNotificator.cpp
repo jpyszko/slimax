@@ -3,9 +3,9 @@
 //
 
 #include <iostream>
-#include "SimpleNotificator.h"
+#include "ConsoleNotificator.h"
 
-void SimpleNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) {
+void ConsoleNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) {
 
     std::cout << "Rosliny: ";
     for (const auto& elem : plants) {

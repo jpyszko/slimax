@@ -7,7 +7,7 @@
 #include "SimulationRunner.h"
 #include "EngineUtils.h"
 
-SimulationRunner::SimulationRunner(Notificator *notificator) : notificator(notificator) {}
+SimulationRunner::SimulationRunner(shared_ptr<Notificator> notificator) : notificator(std::move(notificator)) {}
 
 void SimulationRunner::load(SimulationBuilder &simulationBuilder) {
     simulation = simulationBuilder.build();

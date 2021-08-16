@@ -1,17 +1,7 @@
 #include <iostream>
-#include <chrono>
-#include "model/Snail.h"
-#include "model/RomanSnail.h"
-#include "template/RandomSet.h"
-#include "model/Plant.h"
-#include "model/Lettuce.h"
-#include "model/TurkishSnail.h"
-#include "model/GardenSnail.h"
-#include "model/Grass.h"
-#include "model/Carrot.h"
 #include "engine/SimulationBuilder.h"
 #include "engine/SimulationRunner.h"
-#include "SimpleNotificator.h"
+#include "console/ConsoleNotificator.h"
 
 int main() {
     SimulationBuilder builder;
@@ -24,8 +14,8 @@ int main() {
             .addPlant("salata", LETTUCE, 10)
             .addPlant("trawa", GRASS, 30)
             .addPlant("marchewka", CARROT, 12);
-    SimpleNotificator notificator;
-    SimulationRunner runner(&notificator);
+    shared_ptr<Notificator> notificator = make_shared<ConsoleNotificator>();
+    SimulationRunner runner(notificator);
     runner.load(simulationBuilder);
     SimulationResult result = runner.run();
 
