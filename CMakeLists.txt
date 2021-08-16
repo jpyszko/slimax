@@ -12,7 +12,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(slimax main.cpp model/Snail.cpp model/Snail.h model/RomanSnail.cpp model/RomanSnail.h template/RandomSet.h model/Plant.cpp model/Plant.h model/Lettuce.cpp model/Lettuce.h model/TurkishSnail.cpp model/TurkishSnail.h model/GardenSnail.cpp model/GardenSnail.h model/Grass.cpp model/Grass.h model/Carrot.cpp model/Carrot.h engine/SimulationRunner.cpp engine/SimulationRunner.h engine/SimulationBuilder.cpp engine/SimulationBuilder.h model/Simulation.cpp model/Simulation.h engine/Notificator.h console/ConsoleNotificator.cpp console/ConsoleNotificator.h engine/ValidationException.cpp engine/ValidationException.h engine/EngineUtils.cpp engine/EngineUtils.h)
+add_executable(slimax main.cpp model/Snail.cpp model/Snail.h model/RomanSnail.cpp model/RomanSnail.h template/RandomSet.h model/Plant.cpp model/Plant.h model/Lettuce.cpp model/Lettuce.h model/TurkishSnail.cpp model/TurkishSnail.h model/GardenSnail.cpp model/GardenSnail.h model/Grass.cpp model/Grass.h model/Carrot.cpp model/Carrot.h engine/SimulationRunner.cpp engine/SimulationRunner.h engine/SimulationBuilder.cpp engine/SimulationBuilder.h model/Simulation.cpp model/Simulation.h engine/Notificator.h console/ConsoleNotificator.cpp console/ConsoleNotificator.h engine/ValidationException.cpp engine/ValidationException.h engine/EngineUtils.cpp engine/EngineUtils.h gui/mainwindow.cpp gui/mainwindow.h gui/mainwindow.ui)
 
 target_link_libraries(slimax
         Qt6::Core

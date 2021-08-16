@@ -1,17 +1,16 @@
 #include <iostream>
 #include <QApplication>
-#include <QPushButton>
 #include "engine/SimulationBuilder.h"
 #include "engine/SimulationRunner.h"
 #include "console/ConsoleNotificator.h"
+#include "gui/mainwindow.h"
 
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
-    QPushButton button("Hello world!", nullptr);
-    button.resize(200, 100);
-    button.show();
-    return QApplication::exec();
+    MainWindow w;
+    w.show();
+    return a.exec();
 //    SimulationBuilder builder;
 //    SimulationBuilder &simulationBuilder = builder.simulation(10, 200, 500)
 //            .addSnail("maciek", ROMAN_SNAIL, 5)
