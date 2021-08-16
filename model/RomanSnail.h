@@ -16,9 +16,6 @@ public:
     RomanSnail(string name, int initSize);
 
     void eat(Plant &plant) override;
-
-    ~RomanSnail() = default;
-
 };
 
 

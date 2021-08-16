@@ -42,7 +42,7 @@ public:
         return name < right.name;
     }
 
-    ~Plant() = default;
+    virtual ~Plant() = default;
 
 };
 

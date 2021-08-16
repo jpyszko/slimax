@@ -14,8 +14,6 @@ public:
     Carrot(string name, int initSize);
 
     void grow() override;
-
-    ~Carrot() = default;
 };
 
 

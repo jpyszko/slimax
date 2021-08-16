@@ -16,8 +16,6 @@ public:
     TurkishSnail(string name, int initSize);
 
     void eat(Plant &plant) override;
-
-    ~TurkishSnail() = default;
 };
 
 

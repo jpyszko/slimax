@@ -42,7 +42,7 @@ public:
         return name < right.name;
     }
 
-    ~Snail() = default;
+    virtual ~Snail() = default;
 
 };
 

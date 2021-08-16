@@ -13,8 +13,6 @@ public:
     Lettuce(string name, int initSize);
 
     void grow() override;
-
-    ~Lettuce() = default;
 };
 
 

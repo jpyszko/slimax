@@ -1,5 +1,5 @@
 //
-// Created by yaspe on 01.08.2021.
+// Created by jpyszko on 01.08.2021.
 //
 
 #ifndef SLIMAX_GARDENSNAIL_H
@@ -16,8 +16,6 @@ public:
     GardenSnail(string name, int initSize);
 
     void eat(Plant &plant) override;
-
-    ~GardenSnail() = default;
 };
 
 
