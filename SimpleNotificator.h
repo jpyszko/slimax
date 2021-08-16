@@ -6,6 +6,7 @@
 #define SLIMAX_SIMPLENOTIFICATOR_H
 
 
+#include <memory>
 #include "engine/Notificator.h"
 #include "template/RandomSet.h"
 #include "model/Snail.h"
@@ -13,7 +14,7 @@
 
 class SimpleNotificator : public Notificator{
 public:
-    void notify(int reminingTime, RandomSet<Snail *> &snails, RandomSet<Plant *> &plants) override;
+    void notify(int reminingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) override;
 };
 
 

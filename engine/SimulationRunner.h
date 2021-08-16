@@ -5,6 +5,7 @@
 #ifndef SLIMAX_SIMULATIONRUNNER_H
 #define SLIMAX_SIMULATIONRUNNER_H
 
+#include <memory>
 #include "../model/Simulation.h"
 #include "SimulationBuilder.h"
 #include "Notificator.h"
@@ -24,9 +25,9 @@ private:
     Simulation* simulation = nullptr;
     Notificator* notificator;
 
-    Snail* getAliveRandom(RandomSet<Snail *> &snails);
+    shared_ptr<Snail> getAliveRandom(RandomSet<shared_ptr<Snail>> &snails);
 
-    Plant* getAliveRandom(RandomSet<Plant *> &plants);
+    shared_ptr<Plant> getAliveRandom(RandomSet<shared_ptr<Plant>> &plants);
 
     SimulationResult determineWinner(int numberOfSnails, int numberOfPlants);
 
@@ -37,7 +38,6 @@ public:
     void load(SimulationBuilder& simulationBuilder);
 
     SimulationResult run();
-
 };
 
 

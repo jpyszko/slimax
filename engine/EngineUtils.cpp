@@ -4,17 +4,17 @@
 
 #include "EngineUtils.h"
 
-int EngineUtils::countSnailsArea(RandomSet<Snail *> &snails) {
+int EngineUtils::countSnailsArea(RandomSet<shared_ptr<Snail>> &snails) {
     int totalSnailsArea = 0;
-    for (auto elem : snails) {
+    for (const auto& elem : snails) {
         totalSnailsArea += elem->getSize();
     }
     return totalSnailsArea;
 }
 
-int EngineUtils::countPlantsArea(RandomSet<Plant *> &plants) {
+int EngineUtils::countPlantsArea(RandomSet<shared_ptr<Plant>> &plants) {
     int totalPlantsArea = 0;
-    for (auto elem : plants) {
+    for (const auto& elem : plants) {
         totalPlantsArea += elem->getSize();
     }
     return totalPlantsArea;

@@ -5,7 +5,7 @@
 #ifndef SLIMAX_SIMULATION_H
 #define SLIMAX_SIMULATION_H
 
-
+#include <memory>
 #include "../template/RandomSet.h"
 #include "Snail.h"
 #include "Plant.h"
@@ -16,19 +16,19 @@ class Simulation {
 
 private:
     const int aquariumArea;
-    const RandomSet<Snail*> snails;
-    const RandomSet<Plant*> plants;
+    const RandomSet<shared_ptr<Snail>> snails;
+    const RandomSet<shared_ptr<Plant>> plants;
 
     int duration;
 
 public:
     Simulation(int duration, int aquariumWeight, int aquariumLength,
-               RandomSet<Snail *> snails, RandomSet<Plant *> plants);
+               RandomSet<shared_ptr<Snail>> snails, RandomSet<shared_ptr<Plant>> plants);
 
 
-    RandomSet<Snail*> getSnails();
+    RandomSet<shared_ptr<Snail>> getSnails();
 
-    RandomSet<Plant*> getPlants();
+    RandomSet<shared_ptr<Plant>> getPlants();
 
     int getAquariumArea();
 

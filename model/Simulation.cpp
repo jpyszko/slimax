@@ -4,20 +4,18 @@
 
 #include "Simulation.h"
 
-#include <utility>
-
-Simulation::Simulation(int duration, int aquariumWeight, int aquariumLength, RandomSet<Snail *> snails,
-                       RandomSet<Plant *> plants)
+Simulation::Simulation(int duration, int aquariumWeight, int aquariumLength, RandomSet<shared_ptr<Snail>> snails,
+                       RandomSet<shared_ptr<Plant>> plants)
         : duration(duration), aquariumArea(aquariumWeight * aquariumLength),
         snails(std::move(snails)), plants(std::move(plants)) {
 
 }
 
-RandomSet<Snail *> Simulation::getSnails() {
+RandomSet<shared_ptr<Snail>> Simulation::getSnails() {
     return snails;
 }
 
-RandomSet<Plant *> Simulation::getPlants() {
+RandomSet<shared_ptr<Plant>> Simulation::getPlants() {
     return plants;
 }
 

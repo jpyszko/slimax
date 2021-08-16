@@ -15,18 +15,18 @@ void SimulationRunner::load(SimulationBuilder &simulationBuilder) {
 
 SimulationResult SimulationRunner::run() {
 
-    RandomSet<Snail *> snails = simulation->getSnails();
-    RandomSet<Plant *> plants = simulation->getPlants();
+    RandomSet<shared_ptr<Snail>> snails = simulation->getSnails();
+    RandomSet<shared_ptr<Plant>> plants = simulation->getPlants();
 
     int numberOfRounds = roundsPerSecond * simulation->getDuration();
     int timeBetweenRounds = 1000 / roundsPerSecond;
 
     for (int roundNumber = 0; roundNumber < numberOfRounds; roundNumber++) {
-        Snail *snail = getAliveRandom(snails);
-        Plant *food = getAliveRandom(plants);
+        shared_ptr<Snail> snail = getAliveRandom(snails);
+        shared_ptr<Plant> food = getAliveRandom(plants);
         snail->eat(*food);
 
-        Plant *plant = getAliveRandom(plants);
+        shared_ptr<Plant> plant = getAliveRandom(plants);
         plant->grow();
 
         int totalSnailsArea = EngineUtils::countSnailsArea(snails);
@@ -55,8 +55,8 @@ SimulationResult SimulationRunner::determineWinner(int numberOfSnails, int numbe
     }
 }
 
-Snail *SimulationRunner::getAliveRandom(RandomSet<Snail *> &snails) {
-    Snail *snail;
+shared_ptr<Snail> SimulationRunner::getAliveRandom(RandomSet<shared_ptr<Snail>> &snails) {
+    shared_ptr<Snail> snail;
     do{
         snail = snails.getRandom();
     } while (snail->getSize() <= 0);
@@ -64,8 +64,8 @@ Snail *SimulationRunner::getAliveRandom(RandomSet<Snail *> &snails) {
     return snail;
 }
 
-Plant *SimulationRunner::getAliveRandom(RandomSet<Plant *> &plants) {
-    Plant *plant;
+shared_ptr<Plant> SimulationRunner::getAliveRandom(RandomSet<shared_ptr<Plant>> &plants) {
+    shared_ptr<Plant> plant;
     do{
         plant = plants.getRandom();
     } while (plant->getSize() <= 0);

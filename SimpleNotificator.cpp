@@ -5,16 +5,16 @@
 #include <iostream>
 #include "SimpleNotificator.h"
 
-void SimpleNotificator::notify(int remainingTime, RandomSet<Snail *> &snails, RandomSet<Plant *> &plants) {
+void SimpleNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) {
 
     std::cout << "Rosliny: ";
-    for (auto elem : plants) {
+    for (const auto& elem : plants) {
         std::cout << elem->getName() << ":" << elem->getSize() << " , ";
     }
     std::cout << std::endl;
 
     std::cout << "Slimaki:";
-    for (auto elem : snails) {
+    for (const auto& elem : snails) {
         std::cout << elem->getName() << ":" << elem->getSize() << " , ";
     }
     std::cout << std::endl;

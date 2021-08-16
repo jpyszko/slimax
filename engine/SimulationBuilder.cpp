@@ -41,27 +41,27 @@ Simulation* SimulationBuilder::build() {
     return new Simulation{duration, aquariumWeight, aquariumLength, snails, plants};
 }
 
-Snail* SimulationBuilder::initSnail(string &name, SnailType type, int initSize) {
+shared_ptr<Snail> SimulationBuilder::initSnail(string &name, SnailType type, int initSize) {
     switch(type){
         case ROMAN_SNAIL:
-            return new RomanSnail(name, initSize);
+            return make_shared<RomanSnail>(name, initSize);
         case TURKISH_SNAIL:
-            return new TurkishSnail(name, initSize);
+            return make_shared<TurkishSnail>(name, initSize);
         case GARDEN_SNAIL:
-            return new GardenSnail(name, initSize);
+            return make_shared<GardenSnail>(name, initSize);
     }
 
     throw ValidationException("Invalid snail type", INVALID_SNAIL_TYPE);
 }
 
-Plant *SimulationBuilder::initPlant(string &name, PlantType type, int initSize) {
+shared_ptr<Plant> SimulationBuilder::initPlant(string &name, PlantType type, int initSize) {
     switch (type) {
         case LETTUCE:
-            return new Lettuce(name, initSize);
+            return make_shared<Lettuce>(name, initSize);
         case GRASS:
-            return new Grass(name, initSize);
+            return make_shared<Grass>(name, initSize);
         case CARROT:
-            return new Carrot(name, initSize);
+            return make_shared<Carrot>(name, initSize);
 
     }
     throw ValidationException("Invalid plant type", INVALID_PLANT_TYPE);
@@ -94,9 +94,9 @@ void SimulationBuilder::validateSimulation(int duration, int aquariumWeight, int
     }
 }
 
-void SimulationBuilder::validateAquariumSize(int aquariumWeight, int aquariumLength,
-                                             RandomSet<Snail *> snails, RandomSet<Plant *> plants) {
-    int aquariumArea = aquariumWeight * aquariumLength;
+void SimulationBuilder::validateAquariumSize(int weight, int length, RandomSet<shared_ptr<Snail>> snails,
+                                             RandomSet<shared_ptr<Plant>> plants) {
+    int aquariumArea = weight * length;
     int totalSnailsArea = EngineUtils::countSnailsArea(snails);
     int totalPlantsArea = EngineUtils::countPlantsArea(plants);
     if(aquariumArea < totalSnailsArea + totalPlantsArea){
