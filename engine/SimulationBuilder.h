@@ -44,7 +44,7 @@ public:
 
     SimulationBuilder& addPlant(string name, PlantType type, int initSize);
 
-    Simulation* build();
+    unique_ptr<Simulation> build();
 
 };
 

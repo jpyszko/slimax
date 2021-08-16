@@ -22,7 +22,7 @@ class SimulationRunner {
 
 private:
     const int roundsPerSecond = 5;
-    Simulation* simulation = nullptr;
+    unique_ptr<Simulation> simulation;
     Notificator* notificator;
 
     shared_ptr<Snail> getAliveRandom(RandomSet<shared_ptr<Snail>> &snails);

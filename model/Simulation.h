@@ -15,26 +15,23 @@ using namespace std;
 class Simulation {
 
 private:
+    const int duration;
     const int aquariumArea;
     const RandomSet<shared_ptr<Snail>> snails;
     const RandomSet<shared_ptr<Plant>> plants;
-
-    int duration;
 
 public:
     Simulation(int duration, int aquariumWeight, int aquariumLength,
                RandomSet<shared_ptr<Snail>> snails, RandomSet<shared_ptr<Plant>> plants);
 
 
-    RandomSet<shared_ptr<Snail>> getSnails();
+    const RandomSet<shared_ptr<Snail>> & getSnails();
 
-    RandomSet<shared_ptr<Plant>> getPlants();
+    const RandomSet<shared_ptr<Plant>> & getPlants();
 
     int getAquariumArea();
 
     int getDuration();
-
-    void setDuration(int duration);
 
     ~Simulation() = default;
 };

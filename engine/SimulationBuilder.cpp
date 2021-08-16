@@ -4,6 +4,8 @@
 
 #include "SimulationBuilder.h"
 
+#include <memory>
+
 #include "../model/RomanSnail.h"
 #include "../model/TurkishSnail.h"
 #include "../model/GardenSnail.h"
@@ -36,9 +38,9 @@ SimulationBuilder& SimulationBuilder::addPlant(string name, PlantType type, int 
     return *this;
 }
 
-Simulation* SimulationBuilder::build() {
+unique_ptr<Simulation> SimulationBuilder::build() {
     validateAquariumSize(aquariumWeight, aquariumLength,snails,plants);
-    return new Simulation{duration, aquariumWeight, aquariumLength, snails, plants};
+    return make_unique<Simulation>(duration, aquariumWeight, aquariumLength, snails, plants);
 }
 
 shared_ptr<Snail> SimulationBuilder::initSnail(string &name, SnailType type, int initSize) {

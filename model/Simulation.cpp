@@ -11,11 +11,11 @@ Simulation::Simulation(int duration, int aquariumWeight, int aquariumLength, Ran
 
 }
 
-RandomSet<shared_ptr<Snail>> Simulation::getSnails() {
+const RandomSet<shared_ptr<Snail>> &Simulation::getSnails() {
     return snails;
 }
 
-RandomSet<shared_ptr<Plant>> Simulation::getPlants() {
+const RandomSet<shared_ptr<Plant>> &Simulation::getPlants() {
     return plants;
 }
 
@@ -25,8 +25,4 @@ int Simulation::getAquariumArea() {
 
 int Simulation::getDuration() {
     return duration;
-}
-
-void Simulation::setDuration(int duration) {
-    this->duration = duration;
 }
