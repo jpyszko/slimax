@@ -46,6 +46,10 @@ public:
 
     unique_ptr<Simulation> build();
 
+    int getAquariumWeight();
+
+    int getAquariumLength();
+
 };
 
 

@@ -23,16 +23,15 @@ SimulationResult SimulationRunner::run() {
 
     int totalSnailsArea;
     int totalPlantsArea;
-
-
-//    notificator->notify(1, snails, plants);
-//    return SNAILS_WINS;
+    int remainingTime;
 
     for (int roundNumber = 0; roundNumber < numberOfRounds; roundNumber++) {
+        remainingTime = simulation->getDuration() - roundNumber/roundsPerSecond;
+
         shared_ptr<Snail> snail = getAliveRandom(snails);
         shared_ptr<Plant> food = getAliveRandom(plants);
         snail->eat(*food);
-        notificator->notify(1, snails, plants);
+        notificator->notify(remainingTime, snails, plants);
 
         totalSnailsArea = EngineUtils::countSnailsArea(snails);
         totalPlantsArea = EngineUtils::countPlantsArea(plants);
@@ -42,7 +41,7 @@ SimulationResult SimulationRunner::run() {
 
         shared_ptr<Plant> plant = getAliveRandom(plants);
         plant->grow();
-        notificator->notify(1, snails, plants);
+        notificator->notify(remainingTime, snails, plants);
 
         totalSnailsArea = EngineUtils::countSnailsArea(snails);
         totalPlantsArea = EngineUtils::countPlantsArea(plants);

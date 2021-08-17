@@ -7,14 +7,13 @@
 
 
 #include <QObject>
-#include <QTableWidget>
+#include "../engine/SimulationRunner.h"
+#include "ui_mainwindow.h"
 
 class Worker : public QObject {
 Q_OBJECT
 public:
-    Worker(QTableWidget *snailsTable, QTableWidget *plantsTable);
-
-    ~Worker();
+    explicit Worker(Ui::MainWindow *mainWindow);
 
 public slots:
 
@@ -24,11 +23,10 @@ signals:
 
     void finished();
 
-    void error(QString err);
+    void showResult(SimulationResult result);
 
 private:
-    QTableWidget* snailsTable;
-    QTableWidget* plantsTable;
+    Ui::MainWindow *window;;
 };
 
 

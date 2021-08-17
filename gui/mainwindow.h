@@ -9,24 +9,29 @@
 #include "../engine/SimulationRunner.h"
 
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private slots:
+
     void on_runSimulation_clicked();
+
+    void showResult(SimulationResult result);
 
 private:
     Ui::MainWindow *ui;
 
     void initTable(QTableWidget *table);
+
+    std::string translateResult(SimulationResult result);
 };
 
 #endif // MAINWINDOW_H

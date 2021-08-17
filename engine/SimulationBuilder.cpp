@@ -106,3 +106,11 @@ void SimulationBuilder::validateAquariumSize(int weight, int length, RandomSet<s
     }
 
 }
+
+int SimulationBuilder::getAquariumWeight() {
+    return aquariumWeight;
+}
+
+int SimulationBuilder::getAquariumLength() {
+    return aquariumLength;
+}

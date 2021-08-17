@@ -5,18 +5,20 @@
 #ifndef SLIMAX_GUINOTIFICATOR_H
 #define SLIMAX_GUINOTIFICATOR_H
 
-
-#include <QTableWidget>
 #include "../engine/Notificator.h"
+#include "ui_mainwindow.h"
 
 class GuiNotificator : public Notificator{
 
 private:
-    QTableWidget* snailsTable;
-    QTableWidget* plantsTable;
+    Ui::MainWindow *window;
+
+    QString translateSnailType(SnailType snailType);
+
+    QString translatePlantType(PlantType plantType);
 
 public:
-    GuiNotificator(QTableWidget *snailsTable, QTableWidget *plantsTable);
+    explicit GuiNotificator(Ui::MainWindow *mainWindow);
 
     void notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) override;
 
