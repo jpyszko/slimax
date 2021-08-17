@@ -6,91 +6,59 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1009</width>
-    <height>682</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableView" name="snailsTable">
+   <widget class="QPushButton" name="runSimulation">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>231</y>
-      <width>441</width>
-      <height>391</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="runButton">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>20</y>
-      <width>211</width>
-      <height>41</height>
+      <x>300</x>
+      <y>30</y>
+      <width>201</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Uruchom symulację</string>
     </property>
    </widget>
+   <widget class="QTableWidget" name="snailsTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>371</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="plantsTable">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>190</y>
+      <width>371</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1009</width>
+     <width>800</width>
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_Symulacja">
-    <property name="title">
-     <string>&amp;Symulacja</string>
-    </property>
-    <addaction name="action_Nowa"/>
-    <addaction name="separator"/>
-    <addaction name="actionZapisz"/>
-    <addaction name="action_Otworz"/>
-   </widget>
-   <widget class="QMenu" name="menu_Pomoc">
-    <property name="title">
-     <string>&amp;Pomoc</string>
-    </property>
-    <addaction name="action_Instrukcja"/>
-    <addaction name="action_O_programie"/>
-   </widget>
-   <addaction name="menu_Symulacja"/>
-   <addaction name="menu_Pomoc"/>
   </widget>
-  <action name="action_Nowa">
-   <property name="text">
-    <string>&amp;Nowa</string>
-   </property>
-  </action>
-  <action name="actionZapisz">
-   <property name="text">
-    <string>&amp;Zapisz</string>
-   </property>
-  </action>
-  <action name="action_Otworz">
-   <property name="text">
-    <string>&amp;Otworz</string>
-   </property>
-  </action>
-  <action name="action_Instrukcja">
-   <property name="text">
-    <string>&amp;Instrukcja</string>
-   </property>
-  </action>
-  <action name="action_O_programie">
-   <property name="text">
-    <string>&amp;O programie</string>
-   </property>
-  </action>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

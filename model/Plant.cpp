@@ -24,8 +24,9 @@ int Plant::getSize() {
 
 int Plant::bite(int biteSize) {
     if(biteSize > getSize()){
+        biteSize = getSize();
         setSize(0);
-        return getSize();
+        return biteSize;
     }
     setSize(getSize() - biteSize);
     return biteSize;

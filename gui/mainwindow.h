@@ -1,31 +1,32 @@
 //
 // Created by jpyszko on 16.08.2021.
 //
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#ifndef SLIMAX_MAINWINDOW_H
-#define SLIMAX_MAINWINDOW_H
-
-#include <QWidget>
 #include <QMainWindow>
+#include <QTableWidget>
+#include "../engine/SimulationRunner.h"
 
+namespace Ui {
+class MainWindow;
+}
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow {
-Q_OBJECT
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    ~MainWindow() override;
+private slots:
+    void on_runSimulation_clicked();
 
 private:
     Ui::MainWindow *ui;
 
-
+    void initTable(QTableWidget *table);
 };
 
-
-#endif //SLIMAX_MAINWINDOW_H
+#endif // MAINWINDOW_H

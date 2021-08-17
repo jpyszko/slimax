@@ -21,27 +21,40 @@ SimulationResult SimulationRunner::run() {
     int numberOfRounds = roundsPerSecond * simulation->getDuration();
     int timeBetweenRounds = 1000 / roundsPerSecond;
 
+    int totalSnailsArea;
+    int totalPlantsArea;
+
+
+//    notificator->notify(1, snails, plants);
+//    return SNAILS_WINS;
+
     for (int roundNumber = 0; roundNumber < numberOfRounds; roundNumber++) {
         shared_ptr<Snail> snail = getAliveRandom(snails);
         shared_ptr<Plant> food = getAliveRandom(plants);
         snail->eat(*food);
+        notificator->notify(1, snails, plants);
+
+        totalSnailsArea = EngineUtils::countSnailsArea(snails);
+        totalPlantsArea = EngineUtils::countPlantsArea(plants);
+        if (totalSnailsArea <= 0 || totalPlantsArea<= 0) {
+            return determineWinner(totalSnailsArea, totalPlantsArea);
+        }
 
         shared_ptr<Plant> plant = getAliveRandom(plants);
         plant->grow();
+        notificator->notify(1, snails, plants);
 
-        int totalSnailsArea = EngineUtils::countSnailsArea(snails);
-        int totalPlantsArea = EngineUtils::countPlantsArea(plants);
+        totalSnailsArea = EngineUtils::countSnailsArea(snails);
+        totalPlantsArea = EngineUtils::countPlantsArea(plants);
         if (totalSnailsArea + totalPlantsArea > simulation->getAquariumArea()) {
             return determineWinner(totalSnailsArea, totalPlantsArea);
         }
 
-        notificator->notify(1, snails, plants);
-
         std::this_thread::sleep_for(std::chrono::milliseconds(timeBetweenRounds));
     }
 
-    int totalSnailsArea = EngineUtils::countSnailsArea(snails);
-    int totalPlantsArea = EngineUtils::countPlantsArea(plants);
+    totalSnailsArea = EngineUtils::countSnailsArea(snails);
+    totalPlantsArea = EngineUtils::countPlantsArea(plants);
     return determineWinner(totalSnailsArea, totalPlantsArea);
 }
 
