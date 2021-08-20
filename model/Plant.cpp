@@ -35,3 +35,21 @@ int Plant::bite(int biteSize) {
 void Plant::setSize(int size) {
     this->size = size;
 }
+
+string Plant::typeToString(PlantType plantType) {
+    return typeNames.at(plantType);
+}
+
+PlantType Plant::stringToType(string plantTypeName) {
+    for(const auto& elem : typeNames){
+        if(elem.second == plantTypeName){
+            return elem.first;
+        }
+    }
+
+    return UNKNOWN_PLANT;
+}
+
+const map<PlantType, string> Plant::typeNames = {{LETTUCE,   "Sałata"},
+                                                 {GRASS, "Trawa"},
+                                                 {CARROT,  "Marchewka"}};

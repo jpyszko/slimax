@@ -1,5 +1,5 @@
 //
-// Created by yaspe on 19.08.2021.
+// Created by jpyszko on 19.08.2021.
 //
 
 #ifndef SLIMAX_TABLECOMBOBOX_H
@@ -7,6 +7,7 @@
 
 
 #include <QStyledItemDelegate>
+#include <QComboBox>
 
 class TableCombobox : public QStyledItemDelegate {
 
@@ -15,11 +16,11 @@ class TableCombobox : public QStyledItemDelegate {
 public:
     TableCombobox(QObject *parent = nullptr);
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
 
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
+
+    virtual ~TableCombobox() = 0;
 
 };
 

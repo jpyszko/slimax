@@ -14,17 +14,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     initTable(ui->snailsTable);
     initTable(ui->plantsTable);
+    notificator = make_shared<GuiNotificator>(ui);
+    runner = new SimulationRunner(notificator);
 
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+    delete runner;
 }
 
 void MainWindow::on_runSimulation_clicked() {
 
-    QThread *thread = new QThread();
-    Worker *worker = new Worker(ui);
+    QThread *thread = new QThread(this);
+    Worker *worker = new Worker(runner, simulation, ui);
     worker->moveToThread(thread);
     connect(thread, &QThread::started, worker, &Worker::process);
     connect(worker, &Worker::finished, thread, &QThread::quit);
@@ -68,6 +71,15 @@ std::string MainWindow::translateResult(SimulationResult result) {
 
 void MainWindow::on_action_Nowa_triggered()
 {
-    EditWindow *edit = new EditWindow;
+    EditWindow *edit = new EditWindow(this);
+    connect(edit, &EditWindow::loadSimulation, this, &MainWindow::loadSimulation);
     edit->open();
+}
+
+void MainWindow::loadSimulation(shared_ptr<SimulationBuilder> builder) {
+
+    runner->load(*builder);
+    notificator->notify(builder->getDuration(), builder->getSnails(), builder->getPlants());
+    ui->aquariumValue->setText(QString::number(builder->getAquariumLength() * builder->getAquariumWeight()));
+    simulation = builder;
 }

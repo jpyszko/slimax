@@ -28,8 +28,16 @@ private slots:
 
     void on_action_Nowa_triggered();
 
+    void loadSimulation(shared_ptr<SimulationBuilder> builder);
+
 private:
     Ui::MainWindow *ui;
+
+    SimulationRunner *runner;
+
+    shared_ptr<Notificator> notificator;
+
+    shared_ptr<SimulationBuilder> simulation;
 
     void initTable(QTableWidget *table);
 

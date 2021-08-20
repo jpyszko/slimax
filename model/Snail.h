@@ -6,8 +6,7 @@
 #define SLIMAX_SNAIL_H
 
 #include <string>
-#include <QObject>
-#include "../template/RandomSet.h"
+#include <map>
 #include "Plant.h"
 
 using namespace std;
@@ -16,10 +15,10 @@ enum SnailType {
     ROMAN_SNAIL,
     TURKISH_SNAIL,
     GARDEN_SNAIL,
-    UNKNOWN
+    UNKNOWN_SNAIL
 };
 
-class Snail : public QObject {
+class Snail {
 
 private:
     const string name;
@@ -42,7 +41,7 @@ public:
 
     int getSize();
 
-    static string typeToString(SnailType);
+    static string typeToString(SnailType snailType);
 
     static SnailType stringToType(string snailTypeName);
 

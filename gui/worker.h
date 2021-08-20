@@ -13,7 +13,7 @@
 class Worker : public QObject {
 Q_OBJECT
 public:
-    explicit Worker(Ui::MainWindow *mainWindow);
+    explicit Worker(SimulationRunner *runner, shared_ptr<SimulationBuilder> simulation, Ui::MainWindow *mainWindow);
 
 public slots:
 
@@ -26,7 +26,9 @@ signals:
     void showResult(SimulationResult result);
 
 private:
-    Ui::MainWindow *window;;
+    Ui::MainWindow *window;
+    SimulationRunner *runner;
+    shared_ptr<SimulationBuilder> simulation;
 };
 
 

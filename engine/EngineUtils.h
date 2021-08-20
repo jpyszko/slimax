@@ -9,6 +9,7 @@
 #include <memory>
 #include "../model/Snail.h"
 #include "../model/Plant.h"
+#include "../template/RandomSet.h"
 
 class EngineUtils {
 

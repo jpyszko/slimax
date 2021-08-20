@@ -39,6 +39,7 @@ SimulationBuilder& SimulationBuilder::addPlant(string name, PlantType type, int 
 }
 
 unique_ptr<Simulation> SimulationBuilder::build() {
+
     validateAquariumSize(aquariumWeight, aquariumLength,snails,plants);
     return make_unique<Simulation>(duration, aquariumWeight, aquariumLength, snails, plants);
 }
@@ -113,4 +114,16 @@ int SimulationBuilder::getAquariumWeight() {
 
 int SimulationBuilder::getAquariumLength() {
     return aquariumLength;
+}
+
+int SimulationBuilder::getDuration() {
+    return duration;
+}
+
+RandomSet<shared_ptr<Snail>> &SimulationBuilder::getSnails() {
+    return snails;
+}
+
+RandomSet<shared_ptr<Plant>> &SimulationBuilder::getPlants() {
+    return plants;
 }

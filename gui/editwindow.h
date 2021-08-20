@@ -6,6 +6,9 @@
 
 #include <QDialog>
 #include <QTableWidget>
+#include <QComboBox>
+#include "tablecombobox.h"
+#include "../engine/SimulationBuilder.h"
 
 namespace Ui {
 class EditWindow;
@@ -30,10 +33,19 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    signals:
+
+    void loadSimulation(shared_ptr<SimulationBuilder> builder);
+
 private:
     Ui::EditWindow *ui;
 
     void initTable(QTableWidget *table);
+
+    QString getNullableString(QTableWidgetItem* item);
+
+    int getNullableSize(QTableWidgetItem* item);
+
 };
 
 #endif // EDITWINDOW_H

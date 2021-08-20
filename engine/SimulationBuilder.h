@@ -50,6 +50,12 @@ public:
 
     int getAquariumLength();
 
+    int getDuration();
+
+    RandomSet<shared_ptr<Snail>> & getSnails();
+
+    RandomSet<shared_ptr<Plant>> & getPlants();
+
 };
 
 

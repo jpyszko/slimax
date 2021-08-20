@@ -2,10 +2,15 @@
 // Created by jpyszko on 19.08.2021.
 //
 
-#include <QComboBox>
+#include <QMessageBox>
 #include "editwindow.h"
 #include "ui_editwindow.h"
-#include "tablecombobox.h"
+#include "../model/Snail.h"
+#include "snailscombobox.h"
+#include "plantscombobox.h"
+#include "tablespinbox.h"
+#include "../engine/SimulationBuilder.h"
+#include "../engine/ValidationException.h"
 
 EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow) {
     ui->setupUi(this);
@@ -13,6 +18,10 @@ EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow
     ui->plantsButtonsLayout->setAlignment(Qt::AlignTop);
     initTable(ui->snailsTable);
     initTable(ui->plantsTable);
+    auto snailCombobox = new SnailsCombobox(ui->snailsTable);
+    ui->snailsTable->setItemDelegateForColumn(1, snailCombobox);
+    auto plantsCombobox = new PlantsCombobox(ui->plantsTable);
+    ui->plantsTable->setItemDelegateForColumn(1, plantsCombobox);
     ui->removeSnailButton->setEnabled(false);
     ui->removePlantButton->setEnabled(false);
 
@@ -30,8 +39,8 @@ void EditWindow::initTable(QTableWidget *table) {
     table->horizontalHeader()->setStretchLastSection(true);
     QStringList labels = {"Nazwa", "Typ", "Aktualny rozmar"};
     table->setHorizontalHeaderLabels(labels);
-    TableCombobox* tableCombobox = new TableCombobox();
-    table->setItemDelegateForColumn(1,tableCombobox);
+    auto initSizeSpinbox = new TableSpinbox(table);
+    table->setItemDelegateForColumn(2, initSizeSpinbox);
 }
 
 void EditWindow::on_addSnailButton_clicked() {
@@ -66,12 +75,45 @@ void EditWindow::on_removePlantButton_clicked() {
 
 void EditWindow::on_buttonBox_accepted()
 {
-    for(int rowNumber = 0 ; rowNumber<ui->snailsTable->rowCount();rowNumber++){
-        QTableWidgetItem *pItem1 = ui->snailsTable->item(rowNumber, 0);
-//        const QString &string = pItem1->data(Qt::EditRole).toString();
-        QTableWidgetItem *pItem2 = ui->snailsTable->item(rowNumber, 1);
-        int i = pItem2->data(Qt::EditRole).toInt();
-        QTableWidgetItem *pItem3 = ui->snailsTable->item(rowNumber, 2);
-
+    try{
+        shared_ptr<SimulationBuilder> builder = make_unique<SimulationBuilder>();
+        builder->simulation(ui->durationValue->value(), ui->aquariumWeightValue->value(), ui->aquariumLengthValue->value());
+        for(int rowNumber = 0 ; rowNumber<ui->snailsTable->rowCount();rowNumber++){
+            const QString &name = getNullableString(ui->snailsTable->item(rowNumber, 0));
+            const QString &type = getNullableString(ui->snailsTable->item(rowNumber, 1));
+            int size = getNullableSize(ui->snailsTable->item(rowNumber,2));
+            builder->addSnail(name.toStdString(), Snail::stringToType(type.toStdString()), size);
+        }
+        for(int rowNumber = 0 ; rowNumber<ui->plantsTable->rowCount();rowNumber++){
+            const QString &name = getNullableString(ui->plantsTable->item(rowNumber, 0));
+            const QString &type = getNullableString(ui->plantsTable->item(rowNumber, 1));
+            int size = getNullableSize(ui->plantsTable->item(rowNumber,2));
+            builder->addPlant(name.toStdString(), Plant::stringToType(type.toStdString()), size);
+        }
+        emit loadSimulation(builder);
+        emit accept();
+    } catch (ValidationException exception){
+        QMessageBox msgBox;
+        msgBox.setStyleSheet("QLabel{min-width: 200px;}");
+        msgBox.setText(QString::fromStdString(exception.what()));
+        msgBox.exec();
     }
+
+
+}
+
+QString EditWindow::getNullableString(QTableWidgetItem* item) {
+    if(item){
+        return item->text();
+    }
+
+    return {};
+}
+
+int EditWindow::getNullableSize(QTableWidgetItem *item) {
+    if(item){
+        return item->data(Qt::EditRole).toInt();
+    }
+
+    return 0;
 }

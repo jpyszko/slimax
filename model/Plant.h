@@ -6,13 +6,15 @@
 #define SLIMAX_PLANT_H
 
 #include <string>
+#include <map>
 
 using namespace std;
 
 enum PlantType {
     LETTUCE,
     GRASS,
-    CARROT
+    CARROT,
+    UNKNOWN_PLANT
 };
 
 class Plant {
@@ -21,6 +23,8 @@ private:
     const string name;
     const PlantType type;
     int size;
+
+    const static map<PlantType, string> typeNames;
 
 protected:
     Plant(string name, PlantType type, int initSize);
@@ -37,6 +41,10 @@ public:
     PlantType getType();
 
     int getSize();
+
+    static string typeToString(PlantType plantType);
+
+    static PlantType stringToType(string plantTypeName);
 
     bool operator<(const Plant &right) const {
         return name < right.name;

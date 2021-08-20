@@ -31,13 +31,13 @@ string Snail::typeToString(SnailType snailType) {
 }
 
 SnailType Snail::stringToType(string snailTypeName) {
-    for(auto elem : typeNames){
+    for(const auto& elem : typeNames){
         if(elem.second == snailTypeName){
             return elem.first;
         }
     }
 
-    return UNKNOWN;
+    return UNKNOWN_SNAIL;
 }
 
 const map<SnailType, string> Snail::typeNames = {{ROMAN_SNAIL,   "Winniczek"},

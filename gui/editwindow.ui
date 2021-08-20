@@ -41,6 +41,42 @@
    <layout class="QVBoxLayout" name="mainLayout">
     <item>
      <layout class="QGridLayout" name="singleValuesLayout">
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="aquariumWeightValue">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>1000000000</number>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="aquariumLengthLabel">
+        <property name="text">
+         <string>Długość akwarium:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="aquariumLengthValue">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>1000000000</number>
+        </property>
+        <property name="stepType">
+         <enum>QAbstractSpinBox::DefaultStepType</enum>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="aquariumWeightLabel">
         <property name="text">
@@ -55,21 +91,18 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="aquariumLengthValue"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="aquariumWeightValue"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="aquariumLengthLabel">
-        <property name="text">
-         <string>Długość akwarium:</string>
+      <item row="0" column="3">
+       <widget class="QSpinBox" name="durationValue">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>1000000000</number>
+        </property>
+        <property name="displayIntegerBase">
+         <number>10</number>
         </property>
        </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLineEdit" name="durationValue"/>
       </item>
      </layout>
     </item>
@@ -154,22 +187,6 @@
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>EditWindow</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>

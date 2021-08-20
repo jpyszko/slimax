@@ -16,10 +16,6 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
     for (const auto &elem: snails) {
         window->snailsTable->setRowCount(currentRow + 1);
 
-        delete window->snailsTable->item(currentRow, 0);
-        delete window->snailsTable->item(currentRow, 1);
-        delete window->snailsTable->item(currentRow, 2);
-
         window->snailsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
         window->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(translateSnailType(elem->getType())));
         window->snailsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(elem->getSize())));
@@ -28,10 +24,6 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
     currentRow = 0;
     for (const auto &elem: plants) {
         window->plantsTable->setRowCount(currentRow + 1);
-
-        delete window->plantsTable->item(currentRow, 0);
-        delete window->plantsTable->item(currentRow, 1);
-        delete window->plantsTable->item(currentRow, 2);
 
         window->plantsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
         window->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(translatePlantType(elem->getType())));
