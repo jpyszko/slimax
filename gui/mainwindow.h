@@ -26,6 +26,8 @@ private slots:
 
     void showResult(SimulationResult result);
 
+    void on_action_Nowa_triggered();
+
 private:
     Ui::MainWindow *ui;
 

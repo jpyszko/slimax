@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 #include "guinotificator.h"
 #include "worker.h"
+#include "editwindow.h"
 #include <QIdentityProxyModel>
 #include <QThread>
 #include <QMessageBox>
@@ -63,4 +64,10 @@ std::string MainWindow::translateResult(SimulationResult result) {
         default:
             return "Nie ustalono wyniku";
     }
+}
+
+void MainWindow::on_action_Nowa_triggered()
+{
+    EditWindow *edit = new EditWindow;
+    edit->open();
 }

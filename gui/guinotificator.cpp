@@ -5,7 +5,7 @@
 #include "guinotificator.h"
 #include "../engine/EngineUtils.h"
 
-GuiNotificator::GuiNotificator(Ui::MainWindow *mainWindow): window(mainWindow){}
+GuiNotificator::GuiNotificator(Ui::MainWindow *mainWindow) : window(mainWindow) {}
 
 void
 GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) {
@@ -13,8 +13,12 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
     window->totalSnailsValue->setText(QString::number(EngineUtils::countSnailsArea(snails)));
     window->totalPlantsValue->setText(QString::number(EngineUtils::countPlantsArea(plants)));
     int currentRow = 0;
-    for(const auto& elem: snails){
+    for (const auto &elem: snails) {
         window->snailsTable->setRowCount(currentRow + 1);
+
+        delete window->snailsTable->item(currentRow, 0);
+        delete window->snailsTable->item(currentRow, 1);
+        delete window->snailsTable->item(currentRow, 2);
 
         window->snailsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
         window->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(translateSnailType(elem->getType())));
@@ -22,8 +26,12 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
         ++currentRow;
     }
     currentRow = 0;
-    for(const auto& elem: plants){
+    for (const auto &elem: plants) {
         window->plantsTable->setRowCount(currentRow + 1);
+
+        delete window->plantsTable->item(currentRow, 0);
+        delete window->plantsTable->item(currentRow, 1);
+        delete window->plantsTable->item(currentRow, 2);
 
         window->plantsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
         window->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(translatePlantType(elem->getType())));

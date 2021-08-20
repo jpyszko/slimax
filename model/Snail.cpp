@@ -25,3 +25,22 @@ void Snail::setSize(int size) {
     this->size = size;
 
 }
+
+string Snail::typeToString(SnailType snailType) {
+    return typeNames.at(snailType);
+}
+
+SnailType Snail::stringToType(string snailTypeName) {
+    for(auto elem : typeNames){
+        if(elem.second == snailTypeName){
+            return elem.first;
+        }
+    }
+
+    return UNKNOWN;
+}
+
+const map<SnailType, string> Snail::typeNames = {{ROMAN_SNAIL,   "Winniczek"},
+                                                 {TURKISH_SNAIL, "Turecki"},
+                                                 {GARDEN_SNAIL,  "Ogrodowy"}};
+
