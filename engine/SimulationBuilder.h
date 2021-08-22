@@ -33,9 +33,9 @@ private:
     void validateAquariumSize(int weight, int length, RandomSet<shared_ptr<Snail>> snails,
                          RandomSet<shared_ptr<Plant>> plants);
 
-    shared_ptr<Snail> initSnail(string &name, SnailType type, int initSize);
+    shared_ptr<Snail> initSnail(basic_string<char> name, SnailType type, int initSize);
 
-    shared_ptr<Plant> initPlant(string &name, PlantType type, int initSize);
+    shared_ptr<Plant> initPlant(basic_string<char> name, PlantType type, int initSize);
 
 public:
     SimulationBuilder& simulation(int duration, int aquariumWeight, int aquariumLength);

@@ -41,10 +41,18 @@ SimulationBuilder& SimulationBuilder::addPlant(string name, PlantType type, int 
 unique_ptr<Simulation> SimulationBuilder::build() {
 
     validateAquariumSize(aquariumWeight, aquariumLength,snails,plants);
-    return make_unique<Simulation>(duration, aquariumWeight, aquariumLength, snails, plants);
+    RandomSet<shared_ptr<Snail>> snailsDeepCopy;
+    for(auto &snail: snails){
+        snailsDeepCopy.add(initSnail(snail->getName(), snail->getType(),snail->getSize()));
+    }
+    RandomSet<shared_ptr<Plant>> plantsDeepCopy;
+    for(auto &plant: plants){
+        plantsDeepCopy.add(initPlant(plant->getName(), plant->getType(),plant->getSize()));
+    }
+    return make_unique<Simulation>(duration, aquariumWeight, aquariumLength, snailsDeepCopy, plantsDeepCopy);
 }
 
-shared_ptr<Snail> SimulationBuilder::initSnail(string &name, SnailType type, int initSize) {
+shared_ptr<Snail> SimulationBuilder::initSnail(basic_string<char> name, SnailType type, int initSize) {
     switch(type){
         case ROMAN_SNAIL:
             return make_shared<RomanSnail>(name, initSize);
@@ -57,7 +65,7 @@ shared_ptr<Snail> SimulationBuilder::initSnail(string &name, SnailType type, int
     throw ValidationException("Invalid snail type", INVALID_SNAIL_TYPE);
 }
 
-shared_ptr<Plant> SimulationBuilder::initPlant(string &name, PlantType type, int initSize) {
+shared_ptr<Plant> SimulationBuilder::initPlant(basic_string<char> name, PlantType type, int initSize) {
     switch (type) {
         case LETTUCE:
             return make_shared<Lettuce>(name, initSize);
