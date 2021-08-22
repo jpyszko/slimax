@@ -27,6 +27,28 @@ EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow
 
 }
 
+EditWindow::EditWindow(shared_ptr<SimulationBuilder> simulation, QWidget *parent) : EditWindow(parent) {
+    ui->durationValue->setValue(simulation->getDuration());
+    ui->aquariumWeightValue->setValue(simulation->getAquariumWeight());
+    ui->aquariumLengthValue->setValue(simulation->getAquariumLength());
+    for (auto snail: simulation->getSnails()){
+        int currentRow = ui->snailsTable->rowCount();
+        ui->snailsTable->setRowCount(currentRow + 1);
+
+        ui->snailsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(snail->getName())));
+        ui->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Snail::typeToString(snail->getType()))));
+        ui->snailsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(snail->getSize())));
+    }
+    for (auto plant: simulation->getPlants()){
+        int currentRow = ui->plantsTable->rowCount();
+        ui->plantsTable->setRowCount(currentRow + 1);
+
+        ui->plantsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(plant->getName())));
+        ui->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Plant::typeToString(plant->getType()))));
+        ui->plantsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(plant->getSize())));
+    }
+}
+
 EditWindow::~EditWindow() {
     delete ui;
 }

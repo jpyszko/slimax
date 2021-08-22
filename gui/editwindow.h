@@ -20,6 +20,7 @@ class EditWindow : public QDialog
 
 public:
     explicit EditWindow(QWidget *parent = nullptr);
+    explicit EditWindow(shared_ptr<SimulationBuilder> simulation, QWidget *parent = nullptr);
     ~EditWindow();
 
 private slots:

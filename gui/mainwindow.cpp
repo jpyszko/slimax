@@ -12,6 +12,8 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    ui->runSimulation->setEnabled(false);
+    ui->action_Modyfikuj->setEnabled(false);
     initTable(ui->snailsTable);
     initTable(ui->plantsTable);
     notificator = make_shared<GuiNotificator>(ui);
@@ -76,10 +78,19 @@ void MainWindow::on_action_Nowa_triggered()
     edit->open();
 }
 
+void MainWindow::on_action_Modyfikuj_triggered() {
+
+    EditWindow *edit = new EditWindow(simulation, this);
+    connect(edit, &EditWindow::loadSimulation, this, &MainWindow::loadSimulation);
+    edit->open();
+}
+
 void MainWindow::loadSimulation(shared_ptr<SimulationBuilder> builder) {
 
     runner->load(*builder);
     notificator->notify(builder->getDuration(), builder->getSnails(), builder->getPlants());
     ui->aquariumValue->setText(QString::number(builder->getAquariumLength() * builder->getAquariumWeight()));
     simulation = builder;
+    ui->runSimulation->setEnabled(true);
+    ui->action_Modyfikuj->setEnabled(true);
 }

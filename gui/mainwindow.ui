@@ -223,6 +223,7 @@
      <string>&amp;Symulacja</string>
     </property>
     <addaction name="action_Nowa"/>
+    <addaction name="action_Modyfikuj"/>
    </widget>
    <addaction name="menu_Symulacja"/>
   </widget>
@@ -230,6 +231,11 @@
   <action name="action_Nowa">
    <property name="text">
     <string>&amp;Nowa</string>
+   </property>
+  </action>
+  <action name="action_Modyfikuj">
+   <property name="text">
+    <string>&amp;Modyfikuj</string>
    </property>
   </action>
  </widget>

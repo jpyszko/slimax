@@ -13,10 +13,6 @@ class GuiNotificator : public Notificator{
 private:
     Ui::MainWindow *window;
 
-    QString translateSnailType(SnailType snailType);
-
-    QString translatePlantType(PlantType plantType);
-
 public:
     explicit GuiNotificator(Ui::MainWindow *mainWindow);
 

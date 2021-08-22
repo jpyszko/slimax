@@ -17,7 +17,7 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
         window->snailsTable->setRowCount(currentRow + 1);
 
         window->snailsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
-        window->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(translateSnailType(elem->getType())));
+        window->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Snail::typeToString(elem->getType()))));
         window->snailsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(elem->getSize())));
         ++currentRow;
     }
@@ -26,35 +26,8 @@ GuiNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, 
         window->plantsTable->setRowCount(currentRow + 1);
 
         window->plantsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(elem->getName())));
-        window->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(translatePlantType(elem->getType())));
+        window->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Plant::typeToString(elem->getType()))));
         window->plantsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(elem->getSize())));
         ++currentRow;
-    }
-}
-
-QString GuiNotificator::translateSnailType(SnailType snailType) {
-    switch (snailType) {
-        case ROMAN_SNAIL:
-            return {"Winniczek"};
-        case TURKISH_SNAIL:
-            return {"Turecki"};
-        case GARDEN_SNAIL:
-            return {"Ogrodowy"};
-        default:
-            return {"Nieznany"};
-    }
-}
-
-QString GuiNotificator::translatePlantType(PlantType plantType) {
-    switch (plantType) {
-        case LETTUCE:
-            return {"Sałata"};
-        case GRASS:
-            return {"Trawa"};
-        case CARROT:
-            return {"Marchewka"};
-        default:
-            return {"Nieznany"};
-
     }
 }
