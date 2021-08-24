@@ -18,6 +18,8 @@ public:
 
     void notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) override;
 
+private slots:
+    void on_action_O_programie_triggered();
 };
 
 

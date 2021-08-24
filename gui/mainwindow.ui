@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Slimax</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="runSimulation">
@@ -228,7 +228,14 @@
     <addaction name="action_Zapisz"/>
     <addaction name="action_Otworz"/>
    </widget>
+   <widget class="QMenu" name="menu_Pomoc">
+    <property name="title">
+     <string>&amp;Pomoc</string>
+    </property>
+    <addaction name="action_O_programie"/>
+   </widget>
    <addaction name="menu_Symulacja"/>
+   <addaction name="menu_Pomoc"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_Nowa">
@@ -249,6 +256,11 @@
   <action name="action_Otworz">
    <property name="text">
     <string>&amp;Otworz</string>
+   </property>
+  </action>
+  <action name="action_O_programie">
+   <property name="text">
+    <string>O &amp;programie</string>
    </property>
   </action>
  </widget>

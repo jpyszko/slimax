@@ -56,6 +56,7 @@ void MainWindow::initTable(QTableWidget *table) {
 void MainWindow::showResult(SimulationResult result) {
 
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Wynik symulacji");
     msgBox.setStyleSheet("QLabel{min-width: 200px;}");
     msgBox.setText(QString::fromStdString("<p align='center'>" + translateResult(result) + "</p> "));
     msgBox.exec();
@@ -144,4 +145,14 @@ void MainWindow::on_action_Otworz_triggered()
         in >> builder;
         loadSimulation(simulation);
     }
+}
+
+void MainWindow::on_action_O_programie_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("O programie");
+    msgBox.setStyleSheet("QLabel{min-width: 200px;}");
+    msgBox.setText(QString("<p align='center' style=\"font-size:40px;\"> Ślimax </p>"
+                           "<p align='center' style=\"font-size:15px;\">Autor: Józef Pyszko</p>"));
+    msgBox.exec();
 }

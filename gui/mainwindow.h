@@ -36,6 +36,8 @@ private slots:
 
     void on_action_Otworz_triggered();
 
+    void on_action_O_programie_triggered();
+
 private:
     Ui::MainWindow *ui;
 
