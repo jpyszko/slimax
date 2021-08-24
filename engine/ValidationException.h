@@ -20,7 +20,9 @@ enum ExceptionType{
     INVALID_AQUARIUM_SIZE,
     AQUARIUM_TOO_SMALL,
     INVALID_SNAIL_TYPE,
-    INVALID_PLANT_TYPE
+    INVALID_PLANT_TYPE,
+    EMPTY_SNAILS_LIST,
+    EMPTY_PLANTS_LIST
 
 };
 
@@ -34,6 +36,8 @@ public:
     ValidationException(const char* why, ExceptionType type);
 
     const char *what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_USE_NOEXCEPT override;
+
+    ExceptionType getType();
 
 };
 

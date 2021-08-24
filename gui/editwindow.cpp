@@ -14,6 +14,7 @@
 
 EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow) {
     ui->setupUi(this);
+    setWindowTitle("Nowa symulacja");
     ui->snailsButtonsLayout->setAlignment(Qt::AlignTop);
     ui->plantsButtonsLayout->setAlignment(Qt::AlignTop);
     initTable(ui->snailsTable);
@@ -28,23 +29,26 @@ EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow
 }
 
 EditWindow::EditWindow(shared_ptr<SimulationBuilder> simulation, QWidget *parent) : EditWindow(parent) {
+    setWindowTitle("Modyfikuj symulację");
     ui->durationValue->setValue(simulation->getDuration());
     ui->aquariumWeightValue->setValue(simulation->getAquariumWeight());
     ui->aquariumLengthValue->setValue(simulation->getAquariumLength());
-    for (auto snail: simulation->getSnails()){
+    for (auto snail: simulation->getSnails()) {
         int currentRow = ui->snailsTable->rowCount();
         ui->snailsTable->setRowCount(currentRow + 1);
 
         ui->snailsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(snail->getName())));
-        ui->snailsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Snail::typeToString(snail->getType()))));
+        ui->snailsTable->setItem(currentRow, 1,
+                                 new QTableWidgetItem(QString::fromStdString(Snail::typeToString(snail->getType()))));
         ui->snailsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(snail->getSize())));
     }
-    for (auto plant: simulation->getPlants()){
+    for (auto plant: simulation->getPlants()) {
         int currentRow = ui->plantsTable->rowCount();
         ui->plantsTable->setRowCount(currentRow + 1);
 
         ui->plantsTable->setItem(currentRow, 0, new QTableWidgetItem(QString::fromStdString(plant->getName())));
-        ui->plantsTable->setItem(currentRow, 1, new QTableWidgetItem(QString::fromStdString(Plant::typeToString(plant->getType()))));
+        ui->plantsTable->setItem(currentRow, 1,
+                                 new QTableWidgetItem(QString::fromStdString(Plant::typeToString(plant->getType()))));
         ui->plantsTable->setItem(currentRow, 2, new QTableWidgetItem(QString::number(plant->getSize())));
     }
 }
@@ -95,37 +99,37 @@ void EditWindow::on_removePlantButton_clicked() {
     }
 }
 
-void EditWindow::on_buttonBox_accepted()
-{
-    try{
+void EditWindow::on_buttonBox_accepted() {
+    try {
         shared_ptr<SimulationBuilder> builder = make_unique<SimulationBuilder>();
-        builder->simulation(ui->durationValue->value(), ui->aquariumWeightValue->value(), ui->aquariumLengthValue->value());
-        for(int rowNumber = 0 ; rowNumber<ui->snailsTable->rowCount();rowNumber++){
+        builder->simulation(ui->durationValue->value(), ui->aquariumWeightValue->value(),
+                            ui->aquariumLengthValue->value());
+        for (int rowNumber = 0; rowNumber < ui->snailsTable->rowCount(); rowNumber++) {
             const QString &name = getNullableString(ui->snailsTable->item(rowNumber, 0));
             const QString &type = getNullableString(ui->snailsTable->item(rowNumber, 1));
-            int size = getNullableSize(ui->snailsTable->item(rowNumber,2));
+            int size = getNullableSize(ui->snailsTable->item(rowNumber, 2));
             builder->addSnail(name.toStdString(), Snail::stringToType(type.toStdString()), size);
         }
-        for(int rowNumber = 0 ; rowNumber<ui->plantsTable->rowCount();rowNumber++){
+        for (int rowNumber = 0; rowNumber < ui->plantsTable->rowCount(); rowNumber++) {
             const QString &name = getNullableString(ui->plantsTable->item(rowNumber, 0));
             const QString &type = getNullableString(ui->plantsTable->item(rowNumber, 1));
-            int size = getNullableSize(ui->plantsTable->item(rowNumber,2));
+            int size = getNullableSize(ui->plantsTable->item(rowNumber, 2));
             builder->addPlant(name.toStdString(), Plant::stringToType(type.toStdString()), size);
         }
         emit loadSimulation(builder);
         emit accept();
-    } catch (ValidationException exception){
+    } catch (ValidationException& exception) {
         QMessageBox msgBox;
-        msgBox.setStyleSheet("QLabel{min-width: 200px;}");
-        msgBox.setText(QString::fromStdString(exception.what()));
+        msgBox.setWindowTitle("Bląd danych symulacji");
+        msgBox.setText(getErrorContent(exception.getType()));
         msgBox.exec();
     }
 
 
 }
 
-QString EditWindow::getNullableString(QTableWidgetItem* item) {
-    if(item){
+QString EditWindow::getNullableString(QTableWidgetItem *item) {
+    if (item) {
         return item->text();
     }
 
@@ -133,9 +137,35 @@ QString EditWindow::getNullableString(QTableWidgetItem* item) {
 }
 
 int EditWindow::getNullableSize(QTableWidgetItem *item) {
-    if(item){
+    if (item) {
         return item->data(Qt::EditRole).toInt();
     }
 
     return 0;
+}
+
+QString EditWindow::getErrorContent(ExceptionType type) {
+    switch (type) {
+        case EMPTY_SNAIL_NAME:
+            return {"Pole nazwy ślimaka nie może być puste."};
+        case INVALID_SNAIL_SIZE:
+            return {"Początkowy rozmar slimaka musi być liczbą większą od 0."};
+        case EMPTY_PLANT_SIZE:
+            return {"Pole nazwy rośliny nie może być puste."};
+        case INVALID_PLANT_SIZE:
+            return {"Początkowy rozmar rośliny musi być liczbą większą od 0."};
+        case AQUARIUM_TOO_SMALL:
+            return {"Akwiarum jest zbyt małe dla zdefiniowanych ślimaków i roślin."};
+        case INVALID_SNAIL_TYPE:
+            return {"Brak zdefinowanego typu ślimaka."};
+        case INVALID_PLANT_TYPE:
+            return {"Brak zdefinowanego typu rośliny."};
+        case EMPTY_SNAILS_LIST:
+            return {"Lista ślimaków nie może być pusta."};
+        case EMPTY_PLANTS_LIST:
+            return {"Lista roślin nie może być pusta."};
+        default:
+            return {"Niezidentyfikowany bląd"};
+
+    }
 }

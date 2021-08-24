@@ -114,6 +114,12 @@ void SimulationBuilder::validateSimulation(int duration, int aquariumWeight, int
 
 void SimulationBuilder::validateAquariumSize(int weight, int length, RandomSet<shared_ptr<Snail>> snails,
                                              RandomSet<shared_ptr<Plant>> plants) {
+    if(snails.size() < 1){
+        throw ValidationException("Snails list cant be empty", EMPTY_SNAILS_LIST);
+    }
+    if(plants.size() < 1){
+        throw ValidationException("Plants list cant be empty", EMPTY_PLANTS_LIST);
+    }
     int aquariumArea = weight * length;
     int totalSnailsArea = EngineUtils::countSnailsArea(snails);
     int totalPlantsArea = EngineUtils::countPlantsArea(plants);

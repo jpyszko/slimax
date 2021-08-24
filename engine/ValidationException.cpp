@@ -10,3 +10,7 @@ ValidationException::ValidationException(const char *why, ExceptionType type) : 
 const char *ValidationException::what() const noexcept {
     return reason.c_str();
 }
+
+ExceptionType ValidationException::getType() {
+    return type;
+}

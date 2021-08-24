@@ -9,6 +9,7 @@
 #include <QComboBox>
 #include "tablecombobox.h"
 #include "../engine/SimulationBuilder.h"
+#include "../engine/ValidationException.h"
 
 namespace Ui {
 class EditWindow;
@@ -46,6 +47,8 @@ private:
     QString getNullableString(QTableWidgetItem* item);
 
     int getNullableSize(QTableWidgetItem* item);
+
+    QString getErrorContent(ExceptionType type);
 
 };
 
