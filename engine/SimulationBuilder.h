@@ -7,6 +7,7 @@
 
 
 #include <memory>
+#include <QDataStream>
 #include "../template/RandomSet.h"
 #include "../model/Snail.h"
 #include "../model/Plant.h"
@@ -17,12 +18,11 @@ using namespace std;
 class SimulationBuilder {
 
 private:
+    int duration;
     int aquariumWeight;
     int aquariumLength;
     RandomSet<shared_ptr<Snail>> snails;
     RandomSet<shared_ptr<Plant>> plants;
-
-    int duration;
 
     void validateSimulation(int duration, int aquariumWeight, int aquariumLength);
 
@@ -33,11 +33,12 @@ private:
     void validateAquariumSize(int weight, int length, RandomSet<shared_ptr<Snail>> snails,
                          RandomSet<shared_ptr<Plant>> plants);
 
-    shared_ptr<Snail> initSnail(basic_string<char> name, SnailType type, int initSize);
-
-    shared_ptr<Plant> initPlant(basic_string<char> name, PlantType type, int initSize);
-
 public:
+    SimulationBuilder() = default;
+
+    SimulationBuilder(int duration, int aquariumWeight, int aquariumLength, RandomSet<shared_ptr<Snail>> snails,
+                      RandomSet<shared_ptr<Plant>> plants);
+
     SimulationBuilder& simulation(int duration, int aquariumWeight, int aquariumLength);
 
     SimulationBuilder& addSnail(string name, SnailType type, int initSize);
@@ -56,7 +57,19 @@ public:
 
     RandomSet<shared_ptr<Plant>> & getPlants();
 
+    static shared_ptr<Snail> initSnail(basic_string<char> name, SnailType type, int initSize);
+
+    static shared_ptr<Plant> initPlant(basic_string<char> name, PlantType type, int initSize);
 };
+
+QDataStream & operator<< (QDataStream& stream, SimulationBuilder& builder);
+QDataStream & operator>> (QDataStream& stream, SimulationBuilder& builder);
+
+QDataStream & operator<< (QDataStream& stream, RandomSet<shared_ptr<Snail>>& snails);
+QDataStream & operator>> (QDataStream& stream, RandomSet<shared_ptr<Snail>>& snails);
+
+QDataStream & operator<< (QDataStream& stream, RandomSet<shared_ptr<Plant>>& plants);
+QDataStream & operator>> (QDataStream& stream, RandomSet<shared_ptr<Plant>>& plants);
 
 
 #endif //SLIMAX_SIMULATIONBUILDER_H

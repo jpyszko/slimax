@@ -5,6 +5,8 @@
 #include "SimulationBuilder.h"
 
 #include <memory>
+#include <QString>
+#include <utility>
 
 #include "../model/RomanSnail.h"
 #include "../model/TurkishSnail.h"
@@ -14,6 +16,11 @@
 #include "../model/Carrot.h"
 #include "ValidationException.h"
 #include "EngineUtils.h"
+
+SimulationBuilder::SimulationBuilder(int duration, int aquariumWeight, int aquariumLength, RandomSet<shared_ptr<Snail>> snails,
+                                     RandomSet<shared_ptr<Plant>> plants)
+                                     : duration(duration), aquariumLength(aquariumLength), aquariumWeight(aquariumWeight),
+                                     snails(std::move(snails)), plants(std::move(plants)) {}
 
 SimulationBuilder& SimulationBuilder::simulation(int duration, int aquariumWeight, int aquariumLength) {
 
@@ -134,4 +141,65 @@ RandomSet<shared_ptr<Snail>> &SimulationBuilder::getSnails() {
 
 RandomSet<shared_ptr<Plant>> &SimulationBuilder::getPlants() {
     return plants;
+}
+
+QDataStream &operator<<(QDataStream &stream, SimulationBuilder &builder) {
+    return stream << qint32(builder.getDuration()) << qint32(builder.getAquariumWeight()) << qint32(builder.getAquariumLength())
+    << builder.getSnails() << builder.getPlants();
+}
+
+QDataStream &operator>>(QDataStream &stream, SimulationBuilder &builder) {
+    int duration;
+    int width;
+    int length;
+    RandomSet<shared_ptr<Snail>> snails;
+    RandomSet<shared_ptr<Plant>> plants;
+
+    stream >> duration >> width >> length >> snails >> plants;
+    builder = SimulationBuilder(duration, width, length, snails, plants);
+    return stream;
+}
+
+QDataStream &operator<<(QDataStream &stream, RandomSet<shared_ptr<Snail>> &snails) {
+    stream << qint32(snails.size());
+    for (const auto &snail : snails) {
+        stream << QString::fromStdString(snail->getName()) << qint8(snail->getType()) << qint32(snail->getSize());
+    }
+    return stream;
+}
+
+QDataStream &operator>>(QDataStream &stream, RandomSet<shared_ptr<Snail>> &snails) {
+    int setSize;
+    stream >> setSize;
+
+    for (int elNumber = 0; elNumber < setSize; elNumber++) {
+        QString name;
+        int8_t type;
+        int size;
+        stream >> name >> type >> size;
+        snails.add(SimulationBuilder::initSnail(name.toStdString(),static_cast<SnailType>(type), size));
+        }
+    return stream;
+}
+
+QDataStream &operator<<(QDataStream &stream, RandomSet<shared_ptr<Plant>> &plants) {
+    stream << qint32(plants.size());
+    for (const auto &plant : plants) {
+        stream << QString::fromStdString(plant->getName()) << qint8(plant->getType()) << qint32 (plant->getSize());
+    }
+    return stream;
+}
+
+QDataStream &operator>>(QDataStream &stream, RandomSet<shared_ptr<Plant>> &plants) {
+    int setSize;
+    stream >> setSize;
+
+    for (int elNumber = 0; elNumber < setSize; elNumber++) {
+        QString name;
+        int8_t type;
+        int size;
+        stream >> name >> type >> size;
+        plants.add(SimulationBuilder::initPlant(name.toStdString(),static_cast<PlantType>(type), size));
+    }
+    return stream;
 }

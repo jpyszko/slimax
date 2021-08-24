@@ -47,6 +47,10 @@ public:
         return container.end();
     }
 
+    int size(){
+        return container.size();
+    }
+
 };
 
 #endif //SLIMAX_RANDOMSET_H

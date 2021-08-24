@@ -32,6 +32,10 @@ private slots:
 
     void loadSimulation(shared_ptr<SimulationBuilder> builder);
 
+    void on_action_Zapisz_triggered();
+
+    void on_action_Otworz_triggered();
+
 private:
     Ui::MainWindow *ui;
 

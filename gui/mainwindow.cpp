@@ -9,11 +9,14 @@
 #include <QIdentityProxyModel>
 #include <QThread>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <sstream>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     ui->runSimulation->setEnabled(false);
     ui->action_Modyfikuj->setEnabled(false);
+    ui->action_Zapisz->setEnabled(false);
     initTable(ui->snailsTable);
     initTable(ui->plantsTable);
     notificator = make_shared<GuiNotificator>(ui);
@@ -71,8 +74,7 @@ std::string MainWindow::translateResult(SimulationResult result) {
     }
 }
 
-void MainWindow::on_action_Nowa_triggered()
-{
+void MainWindow::on_action_Nowa_triggered() {
     EditWindow *edit = new EditWindow(this);
     connect(edit, &EditWindow::loadSimulation, this, &MainWindow::loadSimulation);
     edit->open();
@@ -93,4 +95,53 @@ void MainWindow::loadSimulation(shared_ptr<SimulationBuilder> builder) {
     simulation = builder;
     ui->runSimulation->setEnabled(true);
     ui->action_Modyfikuj->setEnabled(true);
+    ui->action_Zapisz->setEnabled(true);
+}
+
+void MainWindow::on_action_Zapisz_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    "Zapisz Symulację", "",
+                                                    "Symulacja (*.sim);;Wszystkie pliki (*)");
+    if (fileName.isEmpty()) {
+        return;
+    } else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"),
+                                     file.errorString());
+            return;
+        }
+        QDataStream out(&file);
+        out.setVersion(QDataStream::Qt_6_0);
+        SimulationBuilder &builder = *simulation;
+        out << builder;
+    }
+}
+
+void MainWindow::on_action_Otworz_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    "Otwórz Symulację", "",
+                                                    "Symulacja (*.sim);;All Files (*)");
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+    else {
+
+        QFile file(fileName);
+
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(this, "Unable to open file",
+                                     file.errorString());
+            return;
+        }
+
+        QDataStream in(&file);
+        in.setVersion(QDataStream::Qt_6_0);
+        simulation = make_shared<SimulationBuilder>();
+        SimulationBuilder &builder = *simulation;
+        in >> builder;
+        loadSimulation(simulation);
+    }
 }

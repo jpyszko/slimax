@@ -224,6 +224,9 @@
     </property>
     <addaction name="action_Nowa"/>
     <addaction name="action_Modyfikuj"/>
+    <addaction name="separator"/>
+    <addaction name="action_Zapisz"/>
+    <addaction name="action_Otworz"/>
    </widget>
    <addaction name="menu_Symulacja"/>
   </widget>
@@ -236,6 +239,16 @@
   <action name="action_Modyfikuj">
    <property name="text">
     <string>&amp;Modyfikuj</string>
+   </property>
+  </action>
+  <action name="action_Zapisz">
+   <property name="text">
+    <string>&amp;Zapisz</string>
+   </property>
+  </action>
+  <action name="action_Otworz">
+   <property name="text">
+    <string>&amp;Otworz</string>
    </property>
   </action>
  </widget>
