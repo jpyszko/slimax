@@ -1,11 +1,16 @@
-#include <iostream>
-#include <QApplication>
-#include "engine/SimulationBuilder.h"
-#include "engine/SimulationRunner.h"
-#include "console/ConsoleNotificator.h"
-#include "gui/mainwindow.h"
-#include "gui/editwindow.h"
+//
+// Created by jpyszko on 09.03.2021.
+//
 
+#include <QApplication>
+#include "gui/mainwindow.h"
+
+/*!
+ * Głowna funkcja (startowa) programu
+ * @param argc - liczba parametrów podanych podczas uruchomienia programu
+ * @param argv - tablica wartośći parametrów podanych podczas uruchomienia programu
+ * @return wartosc 0 w przypadku prawidlowego wykonania programu, w przeciwnym wypadku kod blędu
+ */
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
