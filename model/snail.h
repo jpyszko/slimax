@@ -46,7 +46,7 @@ public:
     SnailType getType();
 
     /*!
-     * Metoda dostępowa dla aktualnej zajmowanego przez niego pola powierzchni (rozmaru).
+     * Metoda dostępowa dla aktualnego pola powierzchni (rozmaru) zajmowanego przez ślimaka.
      * @return aktualne pole powierzchni zajmowane przez ślimaka
      */
     int getSize();
@@ -54,7 +54,7 @@ public:
     /*!
      * Definicja operatora "<" wykorzystywanego przez RandomSet do ustalenia porządku (kolejności) elementów oraz wykrywania dublikatów.
      * Powyższe sprawdzane jest jedynie na podstawie nazwy ślimaka.
-     * @param right - element z którym obecny element jest porónywany
+     * @param right - slimak (element zbioru) z którym obecny ślimak jest porónywany
      * @return true - jeśli obecny element powienen występować przed elementem right, false - w przeciwnym przypadku
      */
     bool operator<(const Snail &right) const {

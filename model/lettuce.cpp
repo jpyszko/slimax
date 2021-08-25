@@ -2,7 +2,7 @@
 // Created by jpyszko on 18.07.2021.
 //
 
-#include "Lettuce.h"
+#include "lettuce.h"
 
 Lettuce::Lettuce(string name, int initSize) :
         Plant(name, LETTUCE, initSize) {
