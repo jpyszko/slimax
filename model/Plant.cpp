@@ -2,7 +2,7 @@
 // Created by jpyszko on 18.07.2021.
 //
 
-#include "Plant.h"
+#include "plant.h"
 
 
 Plant::Plant(string name, PlantType type, int initSize)

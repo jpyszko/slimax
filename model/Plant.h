@@ -19,18 +19,6 @@ enum PlantType {
 
 class Plant {
 
-private:
-    const string name;
-    const PlantType type;
-    int size;
-
-    const static map<PlantType, string> typeNames;
-
-protected:
-    Plant(string name, PlantType type, int initSize);
-
-    void setSize(int size);
-
 public:
     virtual void grow() = 0;
 
@@ -51,6 +39,18 @@ public:
     }
 
     virtual ~Plant() = default;
+
+protected:
+    Plant(string name, PlantType type, int initSize);
+
+    void setSize(int size);
+
+private:
+    const string name;
+    const PlantType type;
+    int size;
+
+    const static map<PlantType, string> typeNames;
 
 };
 

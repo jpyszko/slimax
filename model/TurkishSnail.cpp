@@ -2,8 +2,7 @@
 // Created by jpyszko on 31.07.2021.
 //
 
-#include "TurkishSnail.h"
-#include <iostream>
+#include "turkishsnail.h"
 
 TurkishSnail::TurkishSnail(string name, int initSize)
         : Snail(std::move(name), TURKISH_SNAIL, initSize) {

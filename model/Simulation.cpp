@@ -2,7 +2,7 @@
 // Created by jpyszko on 01.08.2021.
 //
 
-#include "Simulation.h"
+#include "simulation.h"
 
 Simulation::Simulation(int duration, int aquariumWeight, int aquariumLength, RandomSet<shared_ptr<Snail>> snails,
                        RandomSet<shared_ptr<Plant>> plants)

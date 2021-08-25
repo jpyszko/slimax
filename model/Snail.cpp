@@ -2,7 +2,7 @@
 // Created by jpyszko on 09.03.2021.
 //
 
-#include "Snail.h"
+#include "snail.h"
 
 Snail::Snail(string name, SnailType type, int initSize)
         : name(name), type(type), size(initSize) {
