@@ -8,8 +8,8 @@
 #include <QTableWidget>
 #include <QComboBox>
 #include "tablecombobox.h"
-#include "../engine/SimulationBuilder.h"
-#include "../engine/ValidationException.h"
+#include "../engine/simulationbuilder.h"
+#include "../engine/validationexception.h"
 
 namespace Ui {
 class EditWindow;

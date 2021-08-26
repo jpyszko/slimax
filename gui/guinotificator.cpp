@@ -3,7 +3,7 @@
 //
 
 #include "guinotificator.h"
-#include "../engine/EngineUtils.h"
+#include "../engine/engineutils.h"
 
 GuiNotificator::GuiNotificator(Ui::MainWindow *mainWindow) : window(mainWindow) {}
 

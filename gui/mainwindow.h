@@ -6,7 +6,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
-#include "../engine/SimulationRunner.h"
+#include "../engine/simulationrunner.h"
 
 namespace Ui {
     class MainWindow;

@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <thread>
-#include "SimulationRunner.h"
-#include "EngineUtils.h"
+#include "simulationrunner.h"
+#include "engineutils.h"
 
 SimulationRunner::SimulationRunner(shared_ptr<Notificator> notificator) : notificator(std::move(notificator)) {}
 

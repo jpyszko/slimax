@@ -5,7 +5,7 @@
 #ifndef SLIMAX_GUINOTIFICATOR_H
 #define SLIMAX_GUINOTIFICATOR_H
 
-#include "../engine/Notificator.h"
+#include "../engine/notificator.h"
 #include "ui_mainwindow.h"
 
 /*!

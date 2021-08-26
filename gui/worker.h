@@ -7,7 +7,7 @@
 
 
 #include <QObject>
-#include "../engine/SimulationRunner.h"
+#include "../engine/simulationrunner.h"
 #include "ui_mainwindow.h"
 
 /*!

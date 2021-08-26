@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "ConsoleNotificator.h"
+#include "consolenotificator.h"
 
 void ConsoleNotificator::notify(int remainingTime, RandomSet<shared_ptr<Snail>> &snails, RandomSet<shared_ptr<Plant>> &plants) {
 

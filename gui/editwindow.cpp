@@ -9,8 +9,8 @@
 #include "snailscombobox.h"
 #include "plantscombobox.h"
 #include "tablespinbox.h"
-#include "../engine/SimulationBuilder.h"
-#include "../engine/ValidationException.h"
+#include "../engine/simulationbuilder.h"
+#include "../engine/validationexception.h"
 
 EditWindow::EditWindow(QWidget *parent) : QDialog(parent), ui(new Ui::EditWindow) {
     ui->setupUi(this);

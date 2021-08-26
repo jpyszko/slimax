@@ -3,10 +3,10 @@
 //
 
 #include "worker.h"
-#include "../engine/SimulationBuilder.h"
-#include "../engine/Notificator.h"
+#include "../engine/simulationbuilder.h"
+#include "../engine/notificator.h"
 #include "guinotificator.h"
-#include "../engine/SimulationRunner.h"
+#include "../engine/simulationrunner.h"
 
 Worker::Worker(SimulationRunner *runner, shared_ptr<SimulationBuilder> simulation, Ui::MainWindow *mainWindow)
         : runner(runner), simulation(simulation), window(mainWindow) {}

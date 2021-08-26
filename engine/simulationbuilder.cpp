@@ -2,20 +2,19 @@
 // Created by jpyszko on 01.08.2021.
 //
 
-#include "SimulationBuilder.h"
+#include "simulationbuilder.h"
 
 #include <memory>
 #include <QString>
-#include <utility>
 
-#include "../model/RomanSnail.h"
-#include "../model/TurkishSnail.h"
-#include "../model/GardenSnail.h"
-#include "../model/Lettuce.h"
-#include "../model/Grass.h"
-#include "../model/Carrot.h"
-#include "ValidationException.h"
-#include "EngineUtils.h"
+#include "../model/romansnail.h"
+#include "../model/turkishsnail.h"
+#include "../model/gardensnail.h"
+#include "../model/lettuce.h"
+#include "../model/grass.h"
+#include "../model/carrot.h"
+#include "validationexception.h"
+#include "engineutils.h"
 
 SimulationBuilder::SimulationBuilder(int duration, int aquariumWeight, int aquariumLength, RandomSet<shared_ptr<Snail>> snails,
                                      RandomSet<shared_ptr<Plant>> plants)

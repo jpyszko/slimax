@@ -2,7 +2,7 @@
 // Created by jpyszko on 15.08.2021.
 //
 
-#include "ValidationException.h"
+#include "validationexception.h"
 
 
 ValidationException::ValidationException(const char *why, ExceptionType type) : reason(why), type(type) {}

@@ -2,7 +2,7 @@
 // Created by jpyszko on 15.08.2021.
 //
 
-#include "EngineUtils.h"
+#include "engineutils.h"
 
 int EngineUtils::countSnailsArea(RandomSet<shared_ptr<Snail>> &snails) {
     int totalSnailsArea = 0;
